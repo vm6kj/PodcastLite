@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:background="?attr/backgroundColor"
+    android:layoutDirection="ltr"
+    tools:targetApi="28">
+
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/cover_of_the_podcast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+        tools:layout_editor_absoluteX="0dp">
+
+        <View
+            android:id="@id/exo_progress_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/exo_custom_progress_thumb_size" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@id/exo_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="#FFBEBEBE"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@id/exo_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:includeFontPadding="false"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="#FFBEBEBE"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_episode_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="QQQQQQQQ"
+        android:textColor="?attr/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.104"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@id/exo_rew"
+            style="@style/ExoStyledControls.Button.Center.RewWithAmount" />
+
+
+        <ImageButton
+            android:id="@id/exo_play"
+            style="@style/ExoMediaButton.Play"
+            android:src="@drawable/exo_styled_controls_play" />
+
+        <ImageButton
+            android:id="@id/exo_pause"
+            style="@style/ExoMediaButton.Pause"
+            android:src="@drawable/exo_styled_controls_pause" />
+
+        <ImageButton
+            android:id="@id/exo_ffwd"
+            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<merge xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/exo_center_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layoutDirection="ltr">-->
+
+    <!--        <View-->
+    <!--            android:id="@+id/exo_center_view_background"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:background="@color/exo_black_opacity_30" />-->
+
+    <!--        <include-->
+    <!--            android:id="@+id/exo_embedded_transport_controls"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            layout="@layout/exo_styled_embedded_transport_controls" />-->
+    <!--    </FrameLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/exo_time"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="@dimen/exo_bottom_bar_height"-->
+    <!--            android:paddingStart="@dimen/exo_time_view_padding"-->
+    <!--            android:paddingEnd="@dimen/exo_time_view_padding"-->
+    <!--            android:paddingLeft="@dimen/exo_time_view_padding"-->
+    <!--            android:paddingRight="@dimen/exo_time_view_padding"-->
+    <!--            android:layout_gravity="bottom"-->
+    <!--            android:layoutDirection="ltr">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/exo_position"-->
+    <!--                style="@style/ExoStyledControls.TimeText.Position" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/exo_time_interpunct"-->
+    <!--                style="@style/ExoStyledControls.TimeText.Interpunct" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/exo_duration"-->
+    <!--                style="@style/ExoStyledControls.TimeText.Duration" />-->
+    <!--        </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/exo_minimal_controls"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_gravity="bottom|end"-->
+    <!--        android:layout_marginBottom="@dimen/exo_custom_progress_thumb_size"-->
+    <!--        android:visibility="invisible">-->
+    <!--    </LinearLayout>-->
+
+    <!--    <View android:id="@id/exo_progress_placeholder"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/exo_custom_progress_thumb_size"-->
+    <!--        android:layout_gravity="bottom"-->
+    <!--        android:layout_marginBottom="@dimen/exo_custom_progress_margin_bottom"/>-->
+    <!--</merge>-->

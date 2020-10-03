@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PodcastLite</string>
+
+    <string name="cover_of_the_podcast">Podcast Cover</string>
+    <string name="content_description_iv_play">Play</string>
+    <string name="all_episodes">ALL EPISODES</string>
+</resources>

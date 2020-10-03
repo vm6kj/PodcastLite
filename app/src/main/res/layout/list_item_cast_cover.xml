@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.kc_hsu.podcastlite.ui.podcastlist.PodcastListViewModel" />
+
+        <variable
+            name="podcast"
+            type="com.kc_hsu.podcastlite.data.responsebody.PodcastBody.Data.Podcast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        android:onClick="@{(view) -> viewmodel.onPodcastClicked(podcast)}">
+
+        <com.kc_hsu.podcastlite.customview.SquareImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@color/darkGrey"
+            app:error="@{@color/darkGrey}"
+            app:imageUrl="@{podcast.artworkUrl100}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholder="@{@color/darkGrey}" />
+
+        <TextView
+            android:id="@+id/tv_artist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{podcast.artistName}"
+            android:textColor="?attr/textColor"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cover" />
+
+        <TextView
+            android:id="@+id/tv_podcast_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="@{podcast.name}"
+            android:textColor="?attr/metaTextColor"
+            app:layout_constraintTop_toBottomOf="@+id/tv_artist_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
