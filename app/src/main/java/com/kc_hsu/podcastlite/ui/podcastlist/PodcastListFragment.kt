@@ -58,7 +58,9 @@ class PodcastListFragment : Fragment() {
             val podcast = event.getContentIfNotHandled()
             podcast?.apply {
                 if (podcast.id == "160904630") {
-                    findNavController().navigate(R.id.action_podcastListFragment_to_podcastDetailFragment)
+                    val action =
+                        PodcastListFragmentDirections.actionPodcastListFragmentToPodcastDetailFragment()
+                    findNavController().navigate(action)
                 } else {
                     Timber.d("Mock API doesn't provide ${podcast.name}'s detail data except TED Talks Daily")
                 }

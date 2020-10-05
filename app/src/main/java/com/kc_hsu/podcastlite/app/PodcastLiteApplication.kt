@@ -25,7 +25,15 @@ class PodcastLiteApplication: Application() {
         startKoin {
             androidContext(this@PodcastLiteApplication)
             fragmentFactory()
-            modules(fragmentModule, viewModelModule, listAdapterModule, networkModule, utilModule, loggingModule)
+            modules(
+                fragmentModule,
+                viewModelModule,
+                listAdapterModule,
+                networkModule,
+                utilModule,
+                loggingModule,
+                exoPlayerModule
+            )
         }
     }
 

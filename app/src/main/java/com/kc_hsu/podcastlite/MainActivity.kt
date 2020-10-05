@@ -1,15 +1,8 @@
 package com.kc_hsu.podcastlite
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
-import com.kc_hsu.podcastlite.data.PodcastRepo
-import com.kc_hsu.podcastlite.ui.PodcastPlayerActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         app:controller_layout_id="@layout/custom_player_control_view"
         app:layout_constraintTop_toTopOf="parent"
-        app:show_timeout="0" />
+        app:fastforward_increment="15000"
+        app:rewind_increment="15000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

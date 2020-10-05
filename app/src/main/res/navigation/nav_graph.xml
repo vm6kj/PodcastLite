@@ -27,5 +27,17 @@
         android:id="@+id/podcastPlayerFragment"
         android:name="com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerFragment"
         android:label="podcast_player_fragment"
-        tools:layout="@layout/podcast_player_fragment" />
+        tools:layout="@layout/podcast_player_fragment">
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+        <argument
+            android:name="mp3Url"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

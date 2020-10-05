@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.R
@@ -49,8 +50,12 @@ class PodcastDetailFragment : BaseBindingFragment<PodcastDetailFragmentBinding>(
         podcastDetailViewModel.clieckedEpisode.observe(viewLifecycleOwner, Observer { event ->
             val episode = event.getContentIfNotHandled()
             episode?.apply {
-                this.contentUrl
-                // TODO QQQQ
+                val action =
+                    PodcastDetailFragmentDirections.actionPodcastDetailFragmentToPodcastPlayerFragment(
+                        title,
+                        contentUrl
+                    )
+                findNavController().navigate(action)
             }
         })
 
