@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.utils.DividerItemDecorator
 import kotlinx.android.synthetic.main.podcast_list_fragment.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -48,7 +49,7 @@ class PodcastListFragment : Fragment() {
             )
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             podcastListViewModel.flow.collectLatest {
                 podcastListAdapter.submitData(it)
             }
