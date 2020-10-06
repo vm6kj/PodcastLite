@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
+    android:padding="16dp"
     tools:context="com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerFragment">
 
     <com.google.android.exoplayer2.ui.PlayerControlView
