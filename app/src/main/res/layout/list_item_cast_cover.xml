@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.kc_hsu.podcastlite.ui.podcastlist.PodcastListViewModel" />
@@ -16,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/backgroundColor"
-        android:onClick="@{(view) -> viewmodel.onPodcastClicked(podcast)}">
+        android:onClick="@{() -> viewmodel.onPodcastClicked(podcast)}">
 
         <com.kc_hsu.podcastlite.customview.SquareImageView
             android:id="@+id/iv_cover"
@@ -32,6 +33,7 @@
             android:id="@+id/tv_artist_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:maxLines="1"
             android:text="@{podcast.artistName}"
             android:textColor="?attr/textColor"

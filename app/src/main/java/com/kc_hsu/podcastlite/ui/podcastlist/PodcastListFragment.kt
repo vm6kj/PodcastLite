@@ -1,43 +1,43 @@
 package com.kc_hsu.podcastlite.ui.podcastlist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kc_hsu.podcastlite.R
+import com.kc_hsu.podcastlite.base.AutoClearedValue
+import com.kc_hsu.podcastlite.base.BaseBindingFragment
+import com.kc_hsu.podcastlite.databinding.PodcastListFragmentBinding
 import com.kc_hsu.podcastlite.utils.DividerItemDecorator
-import kotlinx.android.synthetic.main.podcast_list_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
 
-class PodcastListFragment : Fragment() {
+class PodcastListFragment(override val viewModel: PodcastListViewModel) :
+    BaseBindingFragment<PodcastListFragmentBinding, PodcastListViewModel>(R.layout.podcast_list_fragment) {
 
-    private val podcastListViewModel: PodcastListViewModel by viewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.podcast_list_fragment, container, false)
-    }
+    private var podcastListAdapter by AutoClearedValue<PodcastListAdapter>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val podcastListAdapter by inject<PodcastListAdapter> { parametersOf(podcastListViewModel) }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                }
+            })
 
-        rv_podcast_list.apply {
+        podcastListAdapter = get { parametersOf(viewModel) }
+
+        binding.rvPodcastList.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = podcastListAdapter
 
@@ -50,12 +50,12 @@ class PodcastListFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            podcastListViewModel.flow.collectLatest {
+            viewModel.flow.collectLatest {
                 podcastListAdapter.submitData(it)
             }
         }
 
-        podcastListViewModel.clickedPodcast.observe(viewLifecycleOwner, Observer { event ->
+        viewModel.clickedPodcast.observe(viewLifecycleOwner, Observer { event ->
             val podcast = event.getContentIfNotHandled()
             podcast?.apply {
                 if (podcast.id == "160904630") {
@@ -63,14 +63,13 @@ class PodcastListFragment : Fragment() {
                         PodcastListFragmentDirections.actionPodcastListFragmentToPodcastDetailFragment()
                     findNavController().navigate(action)
                 } else {
-                    Timber.d("Mock API doesn't provide ${podcast.name}'s detail data except TED Talks Daily")
+                    Toast.makeText(
+                        context,
+                        "Mock API doesn't provide <${podcast.name}>'s detail data except TED Talks Daily",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        rv_podcast_list.adapter = null
     }
 }

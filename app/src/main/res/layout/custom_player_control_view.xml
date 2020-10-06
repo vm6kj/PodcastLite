@@ -13,7 +13,7 @@
         android:id="@+id/iv_cover"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:background="#FFFFFF"
+        android:src="@color/darkGrey"
         android:contentDescription="@string/cover_of_the_podcast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,102 +70,50 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="?attr/textColor"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/rl_controller"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.104"
         tools:layout_editor_absoluteX="0dp" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_controller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
             android:id="@id/exo_rew"
-            style="@style/ExoStyledControls.Button.Center.RewWithAmount" />
-
+            style="@style/ExoStyledControls.Button.Center.RewWithAmount"
+            android:layout_marginStart="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@id/exo_play"
             style="@style/ExoMediaButton.Play"
-            android:src="@drawable/exo_styled_controls_play" />
+            android:src="@drawable/exo_styled_controls_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/exo_ffwd"
+            app:layout_constraintStart_toEndOf="@+id/exo_rew" />
 
         <ImageButton
             android:id="@id/exo_pause"
             style="@style/ExoMediaButton.Pause"
-            android:src="@drawable/exo_styled_controls_pause" />
+            android:src="@drawable/exo_styled_controls_pause"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/exo_ffwd"
+            app:layout_constraintStart_toEndOf="@+id/exo_rew" />
 
         <ImageButton
             android:id="@id/exo_ffwd"
-            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount" />
+            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--<merge xmlns:android="http://schemas.android.com/apk/res/android">-->
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/exo_center_view"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:layoutDirection="ltr">-->
-
-    <!--        <View-->
-    <!--            android:id="@+id/exo_center_view_background"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:background="@color/exo_black_opacity_30" />-->
-
-    <!--        <include-->
-    <!--            android:id="@+id/exo_embedded_transport_controls"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            layout="@layout/exo_styled_embedded_transport_controls" />-->
-    <!--    </FrameLayout>-->
-
-    <!--        <LinearLayout-->
-    <!--            android:id="@+id/exo_time"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="@dimen/exo_bottom_bar_height"-->
-    <!--            android:paddingStart="@dimen/exo_time_view_padding"-->
-    <!--            android:paddingEnd="@dimen/exo_time_view_padding"-->
-    <!--            android:paddingLeft="@dimen/exo_time_view_padding"-->
-    <!--            android:paddingRight="@dimen/exo_time_view_padding"-->
-    <!--            android:layout_gravity="bottom"-->
-    <!--            android:layoutDirection="ltr">-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/exo_position"-->
-    <!--                style="@style/ExoStyledControls.TimeText.Position" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/exo_time_interpunct"-->
-    <!--                style="@style/ExoStyledControls.TimeText.Interpunct" />-->
-
-    <!--            <TextView-->
-    <!--                android:id="@+id/exo_duration"-->
-    <!--                style="@style/ExoStyledControls.TimeText.Duration" />-->
-    <!--        </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/exo_minimal_controls"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_gravity="bottom|end"-->
-    <!--        android:layout_marginBottom="@dimen/exo_custom_progress_thumb_size"-->
-    <!--        android:visibility="invisible">-->
-    <!--    </LinearLayout>-->
-
-    <!--    <View android:id="@id/exo_progress_placeholder"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="@dimen/exo_custom_progress_thumb_size"-->
-    <!--        android:layout_gravity="bottom"-->
-    <!--        android:layout_marginBottom="@dimen/exo_custom_progress_margin_bottom"/>-->
-    <!--</merge>-->
