@@ -27,14 +27,6 @@ class PodcastListFragment(override val viewModel: PodcastListViewModel) :
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
-                }
-            })
-
         podcastListAdapter = get { parametersOf(viewModel) }
 
         binding.rvPodcastList.apply {

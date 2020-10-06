@@ -33,14 +33,6 @@ class PodcastPlayerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
-                }
-            })
-
         podcastPlayerViewModel.artwork.observe(viewLifecycleOwner, Observer {
             player_control_view.iv_cover.setImageBitmap(it)
         })
