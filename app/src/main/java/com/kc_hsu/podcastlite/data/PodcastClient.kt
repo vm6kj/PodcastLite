@@ -2,6 +2,7 @@ package com.kc_hsu.podcastlite.data
 
 import com.google.gson.GsonBuilder
 import okhttp3.HttpUrl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,9 +13,12 @@ import java.util.concurrent.TimeUnit
 
 object PodcastClient {
 
-    private const val BASE_URL = "https://demo4491005.mockable.io/"
+    private const val BASE_URL = "https://listen-api.listennotes.com/api/v2/"
 
-    fun getApiClient(): PodcastApiService {
+    // TODO Move to Config
+    private const val API_KEY = "b1b2deeb0e5f453fa9183d3ce0fa9653"
+
+    fun getApiClient(): PodcastApi {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -22,8 +26,14 @@ object PodcastClient {
         val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Timber.d(it) })
         logger.level = HttpLoggingInterceptor.Level.BASIC
 
+        val headerInInterceptor = Interceptor { chain ->
+            val request = chain.request().newBuilder().addHeader("X-ListenAPI-Key", API_KEY).build()
+            chain.proceed(request)
+        }
+
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(logger)
+            .addInterceptor(headerInInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .build()
@@ -35,6 +45,6 @@ object PodcastClient {
             .client(okHttpClient)
             .build()
 
-        return retrofit.create(PodcastApiService::class.java)
+        return retrofit.create(PodcastApi::class.java)
     }
 }

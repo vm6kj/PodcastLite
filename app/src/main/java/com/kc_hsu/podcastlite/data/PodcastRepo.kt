@@ -8,10 +8,10 @@ import timber.log.Timber
 
 object PodcastRepo: KoinComponent {
 
-    private val podcastApiService: PodcastApiService by inject()
+    private val podcastApi: PodcastApi by inject()
 
     suspend fun getPodcastList(): List<PodcastBody.Data.Podcast>? {
-        val response = podcastApiService.getCasts()
+        val response = podcastApi.getCasts()
         return if (response.isSuccessful) {
             response.body()?.data?.podcast
         } else {
@@ -21,7 +21,7 @@ object PodcastRepo: KoinComponent {
     }
 
     suspend fun getPodcastDetail(): PodcastDetailBody? {
-        val response = podcastApiService.getcastdetail()
+        val response = podcastApi.getcastdetail()
         return if (response.isSuccessful) {
             response.body()
         } else {
