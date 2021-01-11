@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.jlleitschuh.gradle.ktlint'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+configurations {
+    ktlint
+}
 
 buildscript {
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:8.2.0")
     }
 }
 
@@ -110,25 +110,30 @@ dependencies {
 
     // Google flexbox layout (https://github.com/google/flexbox-layout)
     implementation "com.google.android:flexbox:2.0.1"
+
+    // Ktlint
+    ktlint "com.pinterest:ktlint:0.40.0"
 }
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
-ktlint {
-    debug = true
-    verbose = true
-    android = false
-    outputToConsole = true
-    ignoreFailures = true
-    enableExperimentalRules = true
-    additionalEditorconfigFile = file("/some/additional/.editorconfig")
-    kotlinScriptAdditionalPaths {
-        include fileTree("scripts/")
-    }
-    filter {
-        exclude("**/generated/**")
-        include("**/kotlin/**")
-    }
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/pinterest/ktlint#usage for more
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }

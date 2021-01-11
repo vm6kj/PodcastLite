@@ -2,8 +2,6 @@ package com.kc_hsu.podcastlite.customview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.ImageView
-
 
 class SquareImageView : androidx.appcompat.widget.AppCompatImageView {
     constructor(context: Context) : super(context)

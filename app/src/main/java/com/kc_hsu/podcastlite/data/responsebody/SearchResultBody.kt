@@ -1,79 +1,61 @@
 package com.kc_hsu.podcastlite.data.responsebody
 
-
 import com.google.gson.annotations.SerializedName
 
 data class SearchResultBody(
     @SerializedName("count")
-    val count: Int,
+    var count: Int?,
     @SerializedName("next_offset")
-    val nextOffset: Int,
+    var nextOffset: Int?,
     @SerializedName("results")
-    val results: List<Result>,
+    var results: List<Result?>?,
     @SerializedName("took")
-    val took: Double,
+    var took: Double?,
     @SerializedName("total")
-    val total: Int
+    var total: Int?
 ) {
     data class Result(
-        @SerializedName("audio")
-        val audio: String,
-        @SerializedName("audio_length_sec")
-        val audioLengthSec: Int,
         @SerializedName("description_highlighted")
-        val descriptionHighlighted: String,
+        var descriptionHighlighted: String?,
         @SerializedName("description_original")
-        val descriptionOriginal: String,
+        var descriptionOriginal: String?,
+        @SerializedName("earliest_pub_date_ms")
+        var earliestPubDateMs: Long?,
+        @SerializedName("email")
+        var email: String?,
         @SerializedName("explicit_content")
-        val explicitContent: Boolean,
+        var explicitContent: Boolean?,
+        @SerializedName("genre_ids")
+        var genreIds: List<Int?>?,
         @SerializedName("id")
-        val id: String,
+        var id: String?,
         @SerializedName("image")
-        val image: String,
+        var image: String?,
         @SerializedName("itunes_id")
-        val itunesId: Int,
-        @SerializedName("link")
-        val link: String,
+        var itunesId: Int?,
+        @SerializedName("latest_pub_date_ms")
+        var latestPubDateMs: Long?,
+        @SerializedName("listen_score")
+        var listenScore: String?,
+        @SerializedName("listen_score_global_rank")
+        var listenScoreGlobalRank: String?,
         @SerializedName("listennotes_url")
-        val listennotesUrl: String,
-        @SerializedName("podcast")
-        val podcast: Podcast,
-        @SerializedName("pub_date_ms")
-        val pubDateMs: Long,
+        var listennotesUrl: String?,
+        @SerializedName("publisher_highlighted")
+        var publisherHighlighted: String?,
+        @SerializedName("publisher_original")
+        var publisherOriginal: String?,
         @SerializedName("rss")
-        val rss: String,
+        var rss: String?,
         @SerializedName("thumbnail")
-        val thumbnail: String,
+        var thumbnail: String?,
         @SerializedName("title_highlighted")
-        val titleHighlighted: String,
+        var titleHighlighted: String?,
         @SerializedName("title_original")
-        val titleOriginal: String,
-        @SerializedName("transcripts_highlighted")
-        val transcriptsHighlighted: List<Any>
-    ) {
-        data class Podcast(
-            @SerializedName("genre_ids")
-            val genreIds: List<Int>,
-            @SerializedName("id")
-            val id: String,
-            @SerializedName("image")
-            val image: String,
-            @SerializedName("listen_score")
-            val listenScore: String,
-            @SerializedName("listen_score_global_rank")
-            val listenScoreGlobalRank: String,
-            @SerializedName("listennotes_url")
-            val listennotesUrl: String,
-            @SerializedName("publisher_highlighted")
-            val publisherHighlighted: String,
-            @SerializedName("publisher_original")
-            val publisherOriginal: String,
-            @SerializedName("thumbnail")
-            val thumbnail: String,
-            @SerializedName("title_highlighted")
-            val titleHighlighted: String,
-            @SerializedName("title_original")
-            val titleOriginal: String
-        )
-    }
+        var titleOriginal: String?,
+        @SerializedName("total_episodes")
+        var totalEpisodes: Int?,
+        @SerializedName("website")
+        var website: String?
+    )
 }

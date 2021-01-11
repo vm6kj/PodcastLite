@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.utils.Mp3PlayerStateHolder
@@ -24,7 +22,8 @@ class PodcastPlayerFragment : Fragment() {
     private var mp3PlayerStateHolder = Mp3PlayerStateHolder()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.podcast_player_fragment, container, false)
@@ -33,9 +32,12 @@ class PodcastPlayerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        podcastPlayerViewModel.artwork.observe(viewLifecycleOwner, Observer {
-            player_control_view.iv_cover.setImageBitmap(it)
-        })
+        podcastPlayerViewModel.artwork.observe(
+            viewLifecycleOwner,
+            Observer {
+                player_control_view.iv_cover.setImageBitmap(it)
+            }
+        )
     }
 
     override fun onResume() {

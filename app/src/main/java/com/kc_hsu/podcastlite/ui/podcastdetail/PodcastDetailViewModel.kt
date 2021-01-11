@@ -7,7 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.kc_hsu.podcastlite.Event
-import com.kc_hsu.podcastlite.data.PodcastRepo
 import com.kc_hsu.podcastlite.data.responsebody.PodcastDetailBody
 
 class PodcastDetailViewModel : ViewModel() {

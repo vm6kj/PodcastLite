@@ -1,41 +1,31 @@
 package com.kc_hsu.podcastlite.data.responsebody
 
-
 import com.google.gson.annotations.SerializedName
 
 data class TypeAheadBody(
     @SerializedName("genres")
-    val genres: List<Genre>,
+    var genres: List<Any?>?,
     @SerializedName("podcasts")
-    val podcasts: List<Podcast>,
+    var podcasts: List<Podcast?>?,
     @SerializedName("terms")
-    val terms: List<String>
+    var terms: List<String?>?
 ) {
-    data class Genre(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("parent_id")
-        val parentId: Int
-    )
-
     data class Podcast(
         @SerializedName("explicit_content")
-        val explicitContent: Boolean,
+        var explicitContent: Boolean?,
         @SerializedName("id")
-        val id: String,
+        var id: String?,
         @SerializedName("image")
-        val image: String,
+        var image: String?,
         @SerializedName("publisher_highlighted")
-        val publisherHighlighted: String,
+        var publisherHighlighted: String?,
         @SerializedName("publisher_original")
-        val publisherOriginal: String,
+        var publisherOriginal: String?,
         @SerializedName("thumbnail")
-        val thumbnail: String,
+        var thumbnail: String?,
         @SerializedName("title_highlighted")
-        val titleHighlighted: String,
+        var titleHighlighted: String?,
         @SerializedName("title_original")
-        val titleOriginal: String
+        var titleOriginal: String?
     )
 }

@@ -13,7 +13,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class PodcastLiteApplication: Application() {
+class PodcastLiteApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)

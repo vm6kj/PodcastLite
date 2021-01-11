@@ -1,7 +1,6 @@
 package com.kc_hsu.podcastlite.ui.podcastdetail
 
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
-
 
 class PodcastDetailFragment(override val viewModel: PodcastDetailViewModel) :
     BaseBindingFragment<PodcastDetailFragmentBinding, PodcastDetailViewModel>(R.layout.podcast_detail_fragment) {
@@ -35,23 +33,29 @@ class PodcastDetailFragment(override val viewModel: PodcastDetailViewModel) :
             }
         }
 
-        viewModel.podcastCoverData.observe(viewLifecycleOwner, Observer {
-            binding.imageurl = it.imageUrl
-            binding.collectioname = it.collectionName
-            binding.artistname = it.artistName
-        })
-
-        viewModel.clieckedEpisode.observe(viewLifecycleOwner, Observer { event ->
-            val episode = event.getContentIfNotHandled()
-            episode?.apply {
-                val action =
-                    PodcastDetailFragmentDirections.actionPodcastDetailFragmentToPodcastPlayerFragment(
-                        title,
-                        contentUrl
-                    )
-                findNavController().navigate(action)
+        viewModel.podcastCoverData.observe(
+            viewLifecycleOwner,
+            Observer {
+                binding.imageurl = it.imageUrl
+                binding.collectioname = it.collectionName
+                binding.artistname = it.artistName
             }
-        })
+        )
+
+        viewModel.clieckedEpisode.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                val episode = event.getContentIfNotHandled()
+                episode?.apply {
+                    val action =
+                        PodcastDetailFragmentDirections.actionPodcastDetailFragmentToPodcastPlayerFragment(
+                            title,
+                            contentUrl
+                        )
+                    findNavController().navigate(action)
+                }
+            }
+        )
 
         binding.rvPodcastDetailList.apply {
             layoutManager = LinearLayoutManager(context)

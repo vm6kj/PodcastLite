@@ -2,7 +2,6 @@ package com.kc_hsu.podcastlite.ui.podcastlist
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
-
 
 class PodcastListFragment(override val viewModel: PodcastListViewModel) :
     BaseBindingFragment<PodcastListFragmentBinding, PodcastListViewModel>(R.layout.podcast_list_fragment) {
@@ -47,21 +45,24 @@ class PodcastListFragment(override val viewModel: PodcastListViewModel) :
             }
         }
 
-        viewModel.clickedPodcast.observe(viewLifecycleOwner, Observer { event ->
-            val podcast = event.getContentIfNotHandled()
-            podcast?.apply {
-                if (podcast.id == "160904630") {
-                    val action =
-                        PodcastListFragmentDirections.actionPodcastListFragmentToPodcastDetailFragment()
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Mock API doesn't provide <${podcast.name}>'s detail data except TED Talks Daily",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        viewModel.clickedPodcast.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                val podcast = event.getContentIfNotHandled()
+                podcast?.apply {
+                    if (podcast.id == "160904630") {
+                        val action =
+                            PodcastListFragmentDirections.actionPodcastListFragmentToPodcastDetailFragment()
+                        findNavController().navigate(action)
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Mock API doesn't provide <${podcast.name}>'s detail data except TED Talks Daily",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
-        })
+        )
     }
 }

@@ -6,7 +6,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-object PodcastRepo: KoinComponent {
+object PodcastRepo : KoinComponent {
 
     private val podcastApi: PodcastApi by inject()
 

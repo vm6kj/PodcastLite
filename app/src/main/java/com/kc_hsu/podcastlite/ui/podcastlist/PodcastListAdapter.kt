@@ -9,7 +9,7 @@ import com.kc_hsu.podcastlite.data.responsebody.PodcastBody
 import com.kc_hsu.podcastlite.databinding.ListItemCastCoverBinding
 
 class PodcastListAdapter(private val podcastListViewModel: PodcastListViewModel) :
-    PagingDataAdapter<PodcastBody.Data.Podcast, PodcastListAdapter.PodcastViewHolder>(diffCallback){
+    PagingDataAdapter<PodcastBody.Data.Podcast, PodcastListAdapter.PodcastViewHolder>(diffCallback) {
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<PodcastBody.Data.Podcast>() {

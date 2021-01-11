@@ -29,7 +29,6 @@ class PodcastDetailAdapter(private val podcastDetailViewModel: PodcastDetailView
                 ): Boolean {
                     return oldItem == newItem
                 }
-
             }
     }
 
