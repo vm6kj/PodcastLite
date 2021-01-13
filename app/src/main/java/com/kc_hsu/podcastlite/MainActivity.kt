@@ -1,48 +1,59 @@
 package com.kc_hsu.podcastlite
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kc_hsu.podcastlite.preferences.UserPreferences
+import com.kc_hsu.podcastlite.ui.album.AlbumFragment
+import com.kc_hsu.podcastlite.ui.home.HomeFragment
+import com.kc_hsu.podcastlite.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var navController: NavController
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(UserPreferences.getTheme())
         super.onCreate(savedInstanceState)
         setupKoinFragmentFactory()
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.nav_host_fragment)
+        bvn_host.setOnNavigationItemSelectedListener(this)
+        vp_host.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
 
-        setSupportActionBar(toolbar)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when (destination.id) {
-                R.id.podcastListFragment -> {
-                    toolbar.title = getString(R.string.app_name)
-                }
-                R.id.podcastDetailFragment -> {
-                    toolbar.title = ""
-                }
-                R.id.podcastPlayerFragment -> {
-                    toolbar.title = ""
+            override fun onPageSelected(position: Int) {
+                bvn_host.menu.getItem(position).isChecked = true
+            }
+        })
+        vp_host.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = 3
+
+            override fun createFragment(position: Int): Fragment {
+                return when (position) {
+                    0 -> HomeFragment.newInstance()
+                    1 -> SearchFragment.newInstance()
+                    2 -> AlbumFragment.newInstance()
+                    else -> throw IllegalStateException("Error fragment position!")
                 }
             }
         }
     }
 
-    // Avoid leaking on Android Q devices, refer to: https://issuetracker.google.com/issues/139738913
-    override fun onBackPressed() {
-        if (!navController.popBackStack()) {
-            finishAfterTransition()
-        }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        vp_host.currentItem = item.order
+        return true
     }
 }

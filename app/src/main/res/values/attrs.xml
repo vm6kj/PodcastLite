@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="backgroundColor" format="color"/>
+    <attr name="background_elevated" format="color"/>
     <attr name="textColor" format="color"/>
     <attr name="metaTextColor" format="color"/>
+
+    <attr name="ic_home" format="reference"/>
+    <attr name="ic_search" format="reference" />
+    <attr name="ic_your_album" format="reference" />
 </resources>

@@ -4,4 +4,7 @@
     <string name="cover_of_the_podcast">Podcast Cover</string>
     <string name="content_description_iv_play">Play</string>
     <string name="all_episodes">ALL EPISODES</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_your_album">Your Album</string>
 </resources>

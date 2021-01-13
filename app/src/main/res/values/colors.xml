@@ -5,4 +5,17 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="darkGrey">#202020</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="medium_gray">#afafaf</color>
+
+    <!--Theme Color-->
+    <color name="background_light">#FFFFFF</color>
+    <color name="background_elevated_light">#EFEEEE</color>
+    <color name="background_darktheme">#21272b</color>
+    <color name="background_elevated_darktheme">#2D3337</color>
+
+    <color name="accent_light">#FFC107</color>
+    <color name="accent_dark">#FFEB3B</color>
 </resources>

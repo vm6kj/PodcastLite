@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/backgroundColor"
+        android:background="?attr/background_elevated"
         tools:context="com.kc_hsu.podcastlite.ui.podcastlist.PodcastListFragment">
 
         <androidx.recyclerview.widget.RecyclerView

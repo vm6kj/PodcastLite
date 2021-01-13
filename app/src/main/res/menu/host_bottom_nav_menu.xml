@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="?attr/ic_home"
+        android:orderInCategory="0"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="?attr/ic_search"
+        android:orderInCategory="1"
+        android:title="@string/title_search" />
+
+    <item
+        android:id="@+id/navigation_your_album"
+        android:icon="?attr/ic_your_album"
+        android:orderInCategory="2"
+        android:title="@string/title_your_album" />
+</menu>

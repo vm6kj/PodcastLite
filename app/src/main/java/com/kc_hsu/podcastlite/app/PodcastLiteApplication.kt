@@ -3,6 +3,7 @@ package com.kc_hsu.podcastlite.app
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.kc_hsu.podcastlite.di.*
+import com.kc_hsu.podcastlite.preferences.UserPreferences
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -19,6 +20,7 @@ class PodcastLiteApplication : Application() {
         Stetho.initializeWithDefaults(this)
         initDI()
         initLoggingModule()
+        UserPreferences.init(this)
     }
 
     private fun initDI() {
