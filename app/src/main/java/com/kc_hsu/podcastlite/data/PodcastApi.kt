@@ -11,6 +11,10 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * API Reference:
+ * @see <a href="https://www.listennotes.com/api/docs/">Listen API Documentation</a>
+ */
 interface PodcastApi {
     @GET("getcasts")
     @Headers("Accept: application/json")
@@ -24,21 +28,22 @@ interface PodcastApi {
     // Full-text search
     suspend fun search(
         @Query("q") query: String,
+        @Query("sort_by_date") sortByDate: Int? = null,
         @Query("type") type: String? = null,
-        @Query("offset") offset: Int? = null,
+        @Query("offset") offset: Int? = 0,
         @Query("len_min") lenMin: Int? = null,
         @Query("len_max") lenMax: Int? = null,
         @Query("episode_count_min") episodeCountMin: Int? = null,
         @Query("episode_count_max") episodeCountMax: Int? = null,
         @Query("genre_ids") genreIds: String? = null,
         @Query("published_before") publishedBefore: Int? = null,
-        @Query("published_after") publishedAfter: Int? = null,
+        @Query("published_after") publishedAfter: Int? = 0,
         @Query("only_in") onlyIn: String? = null,
         @Query("language") language: String? = null,
         @Query("region") region: String? = null,
         @Query("ocid") ocid: String? = null,
         @Query("ncid") ncid: String? = null,
-        @Query("safe_mode") safeMode: String? = null
+        @Query("safe_mode") safeMode: Int? = 0
     ): Response<SearchResultBody>
 
     @GET("typeahead")

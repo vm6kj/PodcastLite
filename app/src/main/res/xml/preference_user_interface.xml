@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/appearance"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="system"
+            android:entries="@array/theme_options"
+            android:entryValues="@array/theme_values"
+            android:key="prefTheme"
+            android:summary="@string/pref_sum_select_theme"
+            android:title="@string/pref_title_select_theme"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,4 +1,31 @@
 <resources>
+
+    <style name="Theme.PodcastLite.Light" parent="Theme.Base.PodcastLite.Light">
+
+    </style>
+
+    <style name="Theme.PodcastLite.Dark" parent="Theme.Base.PodcastLite.Dark">
+
+    </style>
+
+    <style name="Theme.PodcastLite.Light.NoTitle" parent="Theme.PodcastLite.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <!--        <item name="android:windowTranslucentNavigation">true</item>-->
+    </style>
+
+    <style name="Theme.PodcastLite.Dark.NoTitle" parent="Theme.PodcastLite.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <!--        <item name="android:windowTranslucentNavigation">true</item>-->
+    </style>
+
     <!-- Base application theme. -->
     <style name="Theme.Base.PodcastLite.Light" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
@@ -15,9 +42,13 @@
         <item name="ic_home">@drawable/ic_home_black</item>
         <item name="ic_search">@drawable/ic_search_black</item>
         <item name="ic_your_album">@drawable/ic_album_black</item>
+        <item name="ic_settings">@drawable/ic_settings_black</item>
+
+        <!-- Preferences Icon -->
+        <item name="ic_appearance">@drawable/ic_appearance_black</item>
     </style>
 
-    <style name="Theme.Base.PodcastLite.Dark" parent="ThemeOverlay.MaterialComponents">
+    <style name="Theme.Base.PodcastLite.Dark" parent="Theme.MaterialComponents">
         <item name="colorAccent">@color/accent_dark</item>
         <item name="colorSecondary">@color/accent_dark</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -33,6 +64,10 @@
         <item name="ic_home">@drawable/ic_home_white</item>
         <item name="ic_search">@drawable/ic_search_white</item>
         <item name="ic_your_album">@drawable/ic_album_white</item>
+        <item name="ic_settings">@drawable/ic_settings_white</item>
+
+        <!-- Preferences Icon -->
+        <item name="ic_appearance">@drawable/ic_appearance_white</item>
     </style>
 
     <style name="Widget.PodcastLite.ActionBar.Light" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
@@ -41,17 +76,5 @@
 
     <style name="Widget.PodcastLite.ActionBar.Dark" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
         <item name="background">@color/background_darktheme</item>
-    </style>
-
-    <style name="DarkThem" parent="Theme.Base.PodcastLite.Light">
-        <!--        <item name="titleTextColor">#FFFFFFFF</item>-->
-        <item name="colorPrimary">#FF000000</item>
-        <item name="colorPrimaryDark">#FF000000</item>
-        <item name="colorAccent">@android:color/white</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="background_elevated">#FF000000</item>
-        <item name="textColor">@android:color/white</item>
-        <item name="metaTextColor">#FFAEAEAE</item>
     </style>
 </resources>

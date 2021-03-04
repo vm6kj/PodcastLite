@@ -4,6 +4,10 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.kc_hsu.podcastlite.data.PodcastClient
+import com.kc_hsu.podcastlite.ui.album.AlbumFragment
+import com.kc_hsu.podcastlite.ui.album.AlbumViewModel
+import com.kc_hsu.podcastlite.ui.home.HomeFragment
+import com.kc_hsu.podcastlite.ui.home.HomeViewModel
 import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailAdapter
 import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailFragment
 import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailViewModel
@@ -12,6 +16,9 @@ import com.kc_hsu.podcastlite.ui.podcastlist.PodcastListFragment
 import com.kc_hsu.podcastlite.ui.podcastlist.PodcastListViewModel
 import com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerFragment
 import com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerViewModel
+import com.kc_hsu.podcastlite.ui.preferences.MainPreferenceFragment
+import com.kc_hsu.podcastlite.ui.search.SearchFragment
+import com.kc_hsu.podcastlite.ui.search.SearchViewModel
 import com.kc_hsu.podcastlite.utils.Mp3PlayerStateHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,12 +31,21 @@ val fragmentModule = module {
     fragment { PodcastListFragment(get()) }
     fragment { PodcastDetailFragment(get()) }
     fragment { PodcastPlayerFragment() }
+
+    fragment { HomeFragment() }
+    fragment { SearchFragment() }
+    fragment { AlbumFragment() }
+    fragment { MainPreferenceFragment() }
 }
 
 val viewModelModule = module {
     viewModel { PodcastListViewModel() }
     viewModel { PodcastDetailViewModel() }
     viewModel { PodcastPlayerViewModel() }
+
+    viewModel { HomeViewModel() }
+    viewModel { SearchViewModel() }
+    viewModel { AlbumViewModel() }
 }
 
 val listAdapterModule = module {
@@ -67,3 +83,9 @@ val exoPlayerModule = module {
         }
     }
 }
+
+// val bottomSheetModule = module {
+//     single {
+//         val sheetBehavior = BottomSheetBehavior.from()
+//     }
+// }

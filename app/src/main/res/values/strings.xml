@@ -7,4 +7,17 @@
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_your_album">Your Album</string>
+
+    <!--  Home Fragment  -->
+
+    <!--  Preferences  -->
+    <string name="settings_title">Settings</string>
+    <string name="user_interface_label">User Interface</string>
+    <string name="user_interface_sum">Appearance, Subscriptions, LockScreen</string>
+    <string name="appearance">Appearance</string>
+    <string name="pref_title_select_theme">Select Theme</string>
+    <string name="pref_sum_select_theme">Change the appearance of PodcastLite.</string>
+    <string name="pref_theme_title_use_system">Use system theme</string>
+    <string name="pref_theme_title_light">Light</string>
+    <string name="pref_theme_title_dark">Dark</string>
 </resources>
