@@ -9,6 +9,9 @@
     <string name="title_your_album">Your Album</string>
 
     <!--  Home Fragment  -->
+    <string name="title_default_string">Title Header</string>
+    <!--  Card of Best Podcast  -->
+    <string name="title_default_podcast_name">Podcast Name</string>
 
     <!--  Preferences  -->
     <string name="settings_title">Settings</string>

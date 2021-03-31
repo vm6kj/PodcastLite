@@ -8,7 +8,7 @@ import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 
 @ModelView(saveViewState = true, autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
-class BestPodcastCarousel(context: Context): Carousel(context) {
+class BestPodcastCarousel(context: Context) : Carousel(context) {
 
     @ModelProp(ModelProp.Option.DoNotHash)
     fun setEpoxyController(controller: EpoxyController) {

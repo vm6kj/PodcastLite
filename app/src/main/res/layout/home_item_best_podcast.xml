@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="podcast"
+            type="com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody.Podcast" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_margin="@dimen/card_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{clickListener}"
+        app:cardCornerRadius="@dimen/card_radius">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="@dimen/card_width"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.kc_hsu.podcastlite.customview.SquareImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#FF6666"
+                android:padding="@dimen/card_padding" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{podcast.title, default=@string/title_default_podcast_name}"
+                android:textSize="@dimen/card_text_size"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

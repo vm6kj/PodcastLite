@@ -5,19 +5,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.kc_hsu.podcastlite.R
-import com.kc_hsu.podcastlite.preferences.UserPreferences
+import com.kc_hsu.podcastlite.base.BaseActivity
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
-import timber.log.Timber
 
-class PreferenceActivity : AppCompatActivity() {
+class PreferenceActivity : BaseActivity() {
     companion object {
         private const val TAG_FRAGMENT = "tag_preference"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(UserPreferences.getTheme())
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
 

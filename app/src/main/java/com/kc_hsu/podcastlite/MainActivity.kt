@@ -5,15 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-import com.kc_hsu.podcastlite.preferences.UserPreferences
+import com.kc_hsu.podcastlite.base.BaseActivity
 import com.kc_hsu.podcastlite.ui.album.AlbumFragment
 import com.kc_hsu.podcastlite.ui.home.HomeFragment
 import com.kc_hsu.podcastlite.ui.preferences.PreferenceActivity
@@ -29,14 +27,11 @@ import timber.log.Timber
  * How to implement a ViewPager with BottomNavigationView using new Navigation Architecture Component?
  * Reference: https://stackoverflow.com/a/54355659/7871271
  */
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var sheetBehavior: LockableBottomSheetBehavior<*>
-    private var lastTheme: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        lastTheme = UserPreferences.getTheme()
-        setTheme(lastTheme)
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -74,14 +69,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         sheetBehavior.peekHeight = resources.getDimension(R.dimen.external_player_height).toInt()
         sheetBehavior.isHideable = false
         sheetBehavior.addBottomSheetCallback(bottomSheetCallback)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (lastTheme != UserPreferences.getTheme()) {
-            finish()
-            startActivity(Intent(this, MainActivity::class.java))
-        }
     }
 
     private val bottomSheetCallback: BottomSheetCallback = object : BottomSheetCallback() {

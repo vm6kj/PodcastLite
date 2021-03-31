@@ -126,7 +126,8 @@ dependencies {
 
     // Airbn Epoxy (https://github.com/airbnb/epoxy)
     implementation "com.airbnb.android:epoxy:$epoxy_version"
-    annotationProcessor "com.airbnb.android:epoxy-processor:$epoxy_version"
+    kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
+    implementation "com.airbnb.android:epoxy-databinding:$epoxy_version"
 }
 
 repositories {

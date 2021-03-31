@@ -3,7 +3,6 @@ package com.kc_hsu.podcastlite.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import androidx.annotation.IntDef
 import androidx.annotation.StringDef
 import androidx.preference.PreferenceManager
 import com.kc_hsu.podcastlite.R

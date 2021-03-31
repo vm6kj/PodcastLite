@@ -2,4 +2,16 @@
 <resources>
     <dimen name="photos_list_spacing">15dp</dimen>
     <dimen name="external_player_height">64dp</dimen>
+
+    <dimen name="common_padding">16dp</dimen>
+    <dimen name="common_margin">8dp</dimen>
+
+    <!--  Card of Best Podcast  -->
+    <dimen name="card_radius">16dp</dimen>
+    <dimen name="card_width">150dp</dimen>
+    <dimen name="card_text_size">16sp</dimen>
+    <dimen name="card_padding">@dimen/common_padding</dimen>
+    <dimen name="card_margin">@dimen/common_margin</dimen>
+
+    <dimen name="item_title_padding">8dp</dimen>
 </resources>

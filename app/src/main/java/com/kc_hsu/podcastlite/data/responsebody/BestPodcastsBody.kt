@@ -8,6 +8,7 @@ data class BestPodcastsBody(
     @SerializedName("has_previous")
     var hasPrevious: Boolean?,
     @SerializedName("id")
+    // genre_id
     var id: Int?,
     @SerializedName("listennotes_url")
     var listennotesUrl: String?,
