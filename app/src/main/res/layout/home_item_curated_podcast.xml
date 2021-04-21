@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
 
         <variable
             name="podcast"
-            type="com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody.Podcast" />
+            type="com.kc_hsu.podcastlite.data.responsebody.CuratedPodcastsNoIdBody.CuratedLists.Podcast" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

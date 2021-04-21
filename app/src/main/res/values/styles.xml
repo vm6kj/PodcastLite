@@ -39,13 +39,7 @@
         <item name="background_elevated">@color/background_elevated_light</item>
         <item name="colorControlNormal">@color/white</item>
 
-        <item name="ic_home">@drawable/ic_home_black</item>
-        <item name="ic_search">@drawable/ic_search_black</item>
-        <item name="ic_your_album">@drawable/ic_album_black</item>
-        <item name="ic_settings">@drawable/ic_settings_black</item>
-
-        <!-- Preferences Icon -->
-        <item name="ic_appearance">@drawable/ic_appearance_black</item>
+        <item name="vectorDrawableColor">@color/greyInLight</item>
     </style>
 
     <style name="Theme.Base.PodcastLite.Dark" parent="Theme.MaterialComponents">
@@ -61,13 +55,7 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColorHint">@color/medium_gray</item>
 
-        <item name="ic_home">@drawable/ic_home_white</item>
-        <item name="ic_search">@drawable/ic_search_white</item>
-        <item name="ic_your_album">@drawable/ic_album_white</item>
-        <item name="ic_settings">@drawable/ic_settings_white</item>
-
-        <!-- Preferences Icon -->
-        <item name="ic_appearance">@drawable/ic_appearance_white</item>
+        <item name="vectorDrawableColor">@color/greyInDark</item>
     </style>
 
     <style name="Widget.PodcastLite.ActionBar.Light" parent="Widget.MaterialComponents.Light.ActionBar.Solid">

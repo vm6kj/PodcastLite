@@ -2,10 +2,12 @@ package com.kc_hsu.podcastlite.ui.podcastdetail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.kc_hsu.podcastlite.data.PodcastRepo
 import com.kc_hsu.podcastlite.data.responsebody.PodcastDetailBody
 import timber.log.Timber
 
+@Deprecated("Unused")
 class PodcastDetailPagingSource(private val podcastCoverData: MutableLiveData<PodcastCoverData>) :
     PagingSource<Int, PodcastDetailBody.Data.Collection.ContentFeed>() {
 
@@ -24,5 +26,9 @@ class PodcastDetailPagingSource(private val podcastCoverData: MutableLiveData<Po
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, PodcastDetailBody.Data.Collection.ContentFeed>): Int? {
+        return 0
     }
 }

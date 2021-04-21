@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kc_hsu.podcastlite.R
-import kotlinx.android.synthetic.main.album_fragment.*
 
 class AlbumFragment : Fragment() {
 
@@ -32,7 +31,7 @@ class AlbumFragment : Fragment() {
         viewModel.text.observe(
             viewLifecycleOwner,
             Observer {
-                tv_album_fragment.text = it
+                // tv_album_fragment.text = it
             }
         )
     }

@@ -3,15 +3,15 @@
     <dimen name="photos_list_spacing">15dp</dimen>
     <dimen name="external_player_height">64dp</dimen>
 
-    <dimen name="common_padding">16dp</dimen>
-    <dimen name="common_margin">8dp</dimen>
+    <dimen name="size_16_dp">16dp</dimen>
+    <dimen name="size_8_dp">8dp</dimen>
 
     <!--  Card of Best Podcast  -->
-    <dimen name="card_radius">16dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
     <dimen name="card_width">150dp</dimen>
-    <dimen name="card_text_size">16sp</dimen>
-    <dimen name="card_padding">@dimen/common_padding</dimen>
-    <dimen name="card_margin">@dimen/common_margin</dimen>
+    <dimen name="card_text_size">12sp</dimen>
+    <dimen name="card_padding">@dimen/size_16_dp</dimen>
+    <dimen name="card_margin">@dimen/size_8_dp</dimen>
 
     <dimen name="item_title_padding">8dp</dimen>
 </resources>

@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_host"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bnv_host">
+        tools:context=".MainActivity">
 
-       <LinearLayout
-           android:id="@+id/ll_player"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical"
-           android:background="?attr/background_elevated"
-           app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Test Sheet"/>
-       </LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bnv_host">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv_host"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/background_elevated"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/host_bottom_nav_menu" />
+            <LinearLayout
+                android:id="@+id/ll_player"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="?attr/background_elevated"
+                app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
 
-</RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Sheet" />
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/background_elevated"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/host_bottom_nav_menu" />
+
+    </RelativeLayout>
+</layout>

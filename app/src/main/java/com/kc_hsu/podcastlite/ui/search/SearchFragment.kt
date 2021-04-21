@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kc_hsu.podcastlite.R
-import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : Fragment() {
 
@@ -32,7 +31,7 @@ class SearchFragment : Fragment() {
         viewModel.text.observe(
             viewLifecycleOwner,
             Observer {
-                tv_search_fragment.text = it
+                // tv_search_fragment.text = it
             }
         )
     }

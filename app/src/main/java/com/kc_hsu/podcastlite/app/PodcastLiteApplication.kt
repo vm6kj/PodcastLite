@@ -34,7 +34,8 @@ class PodcastLiteApplication : Application() {
                 networkModule,
                 utilModule,
                 loggingModule,
-                exoPlayerModule
+                exoPlayerModule,
+                dataSourceModule
             )
         }
     }

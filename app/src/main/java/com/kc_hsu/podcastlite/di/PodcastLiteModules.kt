@@ -3,6 +3,7 @@ package com.kc_hsu.podcastlite.di
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.kc_hsu.podcastlite.data.BestPodcastDataSourceFactory
 import com.kc_hsu.podcastlite.data.PodcastClient
 import com.kc_hsu.podcastlite.ui.album.AlbumFragment
 import com.kc_hsu.podcastlite.ui.album.AlbumViewModel
@@ -84,8 +85,6 @@ val exoPlayerModule = module {
     }
 }
 
-// val bottomSheetModule = module {
-//     single {
-//         val sheetBehavior = BottomSheetBehavior.from()
-//     }
-// }
+val dataSourceModule = module {
+    factory { BestPodcastDataSourceFactory() }
+}

@@ -3,12 +3,5 @@
     <attr name="background_elevated" format="color" />
     <attr name="textColor" format="color" />
     <attr name="metaTextColor" format="color" />
-
-    <attr name="ic_home" format="reference" />
-    <attr name="ic_search" format="reference" />
-    <attr name="ic_your_album" format="reference" />
-    <attr name="ic_settings" format="reference" />
-
-    <!--  Preferences  -->
-    <attr name="ic_appearance" format="reference" />
+    <attr name="vectorDrawableColor" format="color" />
 </resources>

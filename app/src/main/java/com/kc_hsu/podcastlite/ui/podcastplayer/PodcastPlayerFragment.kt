@@ -9,9 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.utils.Mp3PlayerStateHolder
-import kotlinx.android.synthetic.main.custom_player_control_view.*
-import kotlinx.android.synthetic.main.custom_player_control_view.view.*
-import kotlinx.android.synthetic.main.podcast_player_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -35,7 +32,8 @@ class PodcastPlayerFragment : Fragment() {
         podcastPlayerViewModel.artwork.observe(
             viewLifecycleOwner,
             Observer {
-                player_control_view.iv_cover.setImageBitmap(it)
+
+                // player_control_view.iv_cover.setImageBitmap(it)
             }
         )
     }
@@ -53,7 +51,7 @@ class PodcastPlayerFragment : Fragment() {
             Timber.e("mp3Url is null")
             return
         }
-        tv_episode_name.text = title
+        // tv_episode_name.text = title
 
         initPlayer(mp3Url)
     }
@@ -65,8 +63,8 @@ class PodcastPlayerFragment : Fragment() {
 
     private fun initPlayer(url: String) {
         val player = podcastPlayerViewModel.initMp3Player(url, mp3PlayerStateHolder)
-        player_control_view.player = player
-        player_control_view.show()
+        // player_control_view.player = player
+        // player_control_view.show()
     }
 
     private fun releasePlayer() {

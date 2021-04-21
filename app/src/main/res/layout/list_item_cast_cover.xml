@@ -19,15 +19,15 @@
         android:background="?attr/background_elevated"
         android:onClick="@{() -> viewmodel.onPodcastClicked(podcast)}">
 
-        <com.kc_hsu.podcastlite.customview.SquareImageView
+        <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
             android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:src="@color/darkGrey"
-            app:error="@{@color/darkGrey}"
+            android:src="@color/greyInLight"
+            app:error="@{@color/greyInLight}"
             app:imageUrl="@{podcast.artworkUrl100}"
             app:layout_constraintTop_toTopOf="parent"
-            app:placeholder="@{@color/darkGrey}" />
+            app:placeholder="@{@color/greyInLight}" />
 
         <TextView
             android:id="@+id/tv_artist_name"

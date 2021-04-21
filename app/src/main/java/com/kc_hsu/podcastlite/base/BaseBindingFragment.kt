@@ -22,7 +22,7 @@ abstract class BaseBindingFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutR
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
+    ): View =
         DataBindingUtil.inflate<B>(inflater, layoutResourceId, container, false).also {
             binding = it
         }.root

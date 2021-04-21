@@ -21,7 +21,7 @@ data class BestPodcastsBody(
     @SerializedName("parent_id")
     var parentId: Int?,
     @SerializedName("podcasts")
-    var podcasts: List<Podcast?>?,
+    var podcasts: List<Podcast>?,
     @SerializedName("previous_page_number")
     var previousPageNumber: Int?,
     @SerializedName("total")

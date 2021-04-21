@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="darkGrey">#202020</color>
+    <color name="greyInLight">#000000</color>
+    <color name="greyInDark">#C0C6CA</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

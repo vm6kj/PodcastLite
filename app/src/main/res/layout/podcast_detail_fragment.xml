@@ -32,14 +32,14 @@
             android:paddingBottom="20dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.kc_hsu.podcastlite.customview.SquareImageView
+            <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
                 android:id="@+id/iv_cover"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:src="@color/darkGrey"
-                app:error="@{@color/darkGrey}"
+                android:src="@color/greyInLight"
+                app:error="@{@color/greyInLight}"
                 app:imageUrl="@{imageurl}"
-                app:placeholder="@{@color/darkGrey}" />
+                app:placeholder="@{@color/greyInLight}" />
 
             <TextView
                 android:id="@+id/tv_podcast_name"

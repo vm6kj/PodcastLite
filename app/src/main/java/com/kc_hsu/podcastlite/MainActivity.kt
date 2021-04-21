@@ -12,14 +12,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.kc_hsu.podcastlite.base.BaseActivity
+import com.kc_hsu.podcastlite.databinding.ActivityMainBinding
 import com.kc_hsu.podcastlite.ui.album.AlbumFragment
 import com.kc_hsu.podcastlite.ui.home.HomeFragment
 import com.kc_hsu.podcastlite.ui.preferences.PreferenceActivity
 import com.kc_hsu.podcastlite.ui.search.SearchFragment
 import com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_main.bnv_host
-import kotlinx.android.synthetic.main.activity_main.ll_player
-import kotlinx.android.synthetic.main.activity_main.vp_host
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import timber.log.Timber
 
@@ -29,15 +27,19 @@ import timber.log.Timber
  */
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var sheetBehavior: LockableBottomSheetBehavior<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        bnv_host.setOnNavigationItemSelectedListener(this)
-        vp_host.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.bnvHost.setOnNavigationItemSelectedListener(this)
+        binding.vpHost.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -49,10 +51,10 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             }
 
             override fun onPageSelected(position: Int) {
-                bnv_host.menu.getItem(position).isChecked = true
+                binding.bnvHost.menu.getItem(position).isChecked = true
             }
         })
-        vp_host.adapter = object : FragmentStateAdapter(this) {
+        binding.vpHost.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = 3
 
             override fun createFragment(position: Int): Fragment {
@@ -65,7 +67,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             }
         }
 
-        sheetBehavior = BottomSheetBehavior.from(ll_player) as LockableBottomSheetBehavior
+        sheetBehavior = BottomSheetBehavior.from(binding.llPlayer) as LockableBottomSheetBehavior
         sheetBehavior.peekHeight = resources.getDimension(R.dimen.external_player_height).toInt()
         sheetBehavior.isHideable = false
         sheetBehavior.addBottomSheetCallback(bottomSheetCallback)
@@ -96,7 +98,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        vp_host.currentItem = item.order
+        binding.vpHost.currentItem = item.order
         return true
     }
 }
