@@ -36,7 +36,7 @@
                 android:scaleType="fitCenter"
                 app:error="@{@drawable/ic_handyman}"
                 app:imageUrl="@{podcast.image}"
-                app:placeholder="@{@color/colorAccent}" />
+                app:placeholder="@{@drawable/ic_mic_none}" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"

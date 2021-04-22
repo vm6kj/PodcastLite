@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.kc_hsu.podcastlite.base.BaseActivity
+import com.kc_hsu.podcastlite.customview.TopSheetDialog
 import com.kc_hsu.podcastlite.databinding.ActivityMainBinding
 import com.kc_hsu.podcastlite.ui.album.AlbumFragment
 import com.kc_hsu.podcastlite.ui.home.HomeFragment
@@ -30,12 +31,13 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var sheetBehavior: LockableBottomSheetBehavior<*>
+    private lateinit var view: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
+        view = binding.root
         setContentView(view)
 
         binding.bnvHost.setOnNavigationItemSelectedListener(this)
@@ -71,12 +73,20 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         sheetBehavior.peekHeight = resources.getDimension(R.dimen.external_player_height).toInt()
         sheetBehavior.isHideable = false
         sheetBehavior.addBottomSheetCallback(bottomSheetCallback)
+
+        // TODO To be removed, just for testing
+        TopSheetDialog(this).apply {
+            window?.attributes?.windowAnimations = R.style.TopSheet_DialogAnimation
+
+            setContentView(R.layout.top_sheet_dialog)
+        }.show()
     }
 
     private val bottomSheetCallback: BottomSheetCallback = object : BottomSheetCallback() {
         override fun onStateChanged(view: View, state: Int) {
             Timber.d("bottomSheetCallback onStateChanged")
         }
+
         override fun onSlide(view: View, slideOffset: Float) {
             Timber.d("bottomSheetCallback onSlide")
         }
