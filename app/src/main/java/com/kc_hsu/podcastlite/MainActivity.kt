@@ -73,13 +73,6 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         sheetBehavior.peekHeight = resources.getDimension(R.dimen.external_player_height).toInt()
         sheetBehavior.isHideable = false
         sheetBehavior.addBottomSheetCallback(bottomSheetCallback)
-
-        // TODO To be removed, just for testing
-        TopSheetDialog(this).apply {
-            window?.attributes?.windowAnimations = R.style.TopSheet_DialogAnimation
-
-            setContentView(R.layout.top_sheet_dialog)
-        }.show()
     }
 
     private val bottomSheetCallback: BottomSheetCallback = object : BottomSheetCallback() {
@@ -99,10 +92,20 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.setting) {
-            Timber.d("Setting icon clicked!")
-            val intent = Intent(this, PreferenceActivity::class.java)
-            startActivity(intent)
+        when (item.itemId) {
+            R.id.setting -> {
+                Timber.d("Setting icon clicked!")
+                val intent = Intent(this, PreferenceActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.topSheetTest -> {
+                TopSheetDialog(this).apply {
+                    window?.attributes?.windowAnimations = R.style.TopSheet_DialogAnimation
+
+                    setContentView(R.layout.top_sheet_dialog)
+                }.show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

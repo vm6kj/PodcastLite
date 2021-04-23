@@ -1,21 +1,5 @@
 package com.kc_hsu.podcastlite.customview;
 
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -66,6 +50,11 @@ import java.util.Map;
 /**
  * An interaction behavior plugin for a child view of {@link CoordinatorLayout} to make it work as a
  * bottom sheet.
+ *
+ * Reference:
+ * https://gist.github.com/jayrambhia/3860832353ccd22c8ce5478ef7ef63e4
+ * https://github.com/TechIsFun/AndroidTopSheet
+ * https://github.com/nawinkhatiwada/TopSheet
  */
 public class TopSheetBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
 

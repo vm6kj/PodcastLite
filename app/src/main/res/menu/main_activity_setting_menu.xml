@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- To be removed  -->
+    <item
+        android:id="@+id/topSheetTest"
+        android:title="TestTopSheet"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_settings"
