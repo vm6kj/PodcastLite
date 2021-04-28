@@ -15,7 +15,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_host"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bnv_host" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -26,8 +27,8 @@
                 android:id="@+id/ll_player"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:background="?attr/background_elevated"
+                android:orientation="vertical"
                 app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
 
                 <TextView
@@ -42,8 +43,8 @@
             android:id="@+id/bnv_host"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/background_elevated"
             android:layout_alignParentBottom="true"
+            android:background="?attr/background_elevated"
             app:menu="@menu/host_bottom_nav_menu" />
 
     </RelativeLayout>

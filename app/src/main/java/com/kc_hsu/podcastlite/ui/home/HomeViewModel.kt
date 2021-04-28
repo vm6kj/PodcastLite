@@ -8,8 +8,7 @@ import org.koin.core.KoinComponent
 
 class HomeViewModel : ViewModel(), KoinComponent {
 
-    fun getBestPodcastList(): Listing<BestPodcastsBody.Podcast> {
-        // TODO Should it be categorize by using Map?
-        return PodcastRepo.getBestPodcastList()
+    fun getBestPodcastList(genreId: Int): Listing<BestPodcastsBody.Podcast> {
+        return PodcastRepo.getBestPodcastList(genreId)
     }
 }

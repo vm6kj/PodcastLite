@@ -3,22 +3,25 @@ package com.kc_hsu.podcastlite.data
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.kc_hsu.podcastlite.data.datasource.BestPodcastDataSourceFactory
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.data.responsebody.PodcastBody
 import com.kc_hsu.podcastlite.data.responsebody.PodcastDetailBody
 import com.kc_hsu.podcastlite.utils.Listing
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 object PodcastRepo : KoinComponent {
+    private const val DEFAULT_PAGE_SIZE = 1
 
-    private val podcastApi: PodcastApi by inject()
+    private val api: PodcastApi by inject()
 
     suspend fun getPodcastList(): List<PodcastBody.Data.Podcast>? {
-        val response = podcastApi.getCasts()
+        val response = api.getCasts()
         return if (response.isSuccessful) {
             response.body()?.data?.podcast
         } else {
@@ -28,7 +31,7 @@ object PodcastRepo : KoinComponent {
     }
 
     suspend fun getPodcastDetail(): PodcastDetailBody? {
-        val response = podcastApi.getcastdetail()
+        val response = api.getcastdetail()
         return if (response.isSuccessful) {
             response.body()
         } else {
@@ -37,11 +40,18 @@ object PodcastRepo : KoinComponent {
         }
     }
 
-    fun getBestPodcastList(): Listing<BestPodcastsBody.Podcast> {
-        val bestPodcastDataSourceFactory: BestPodcastDataSourceFactory by inject()
+    fun getBestPodcastList(
+        genreId: Int,
+        pageSize: Int = DEFAULT_PAGE_SIZE
+    ): Listing<BestPodcastsBody.Podcast> {
+        val bestPodcastDataSourceFactory: BestPodcastDataSourceFactory by inject {
+            parametersOf(
+                genreId
+            )
+        }
         val pagedList: LiveData<PagedList<BestPodcastsBody.Podcast>> by lazy {
             val pagedListConfig = PagedList.Config.Builder()
-                .setPageSize(5)
+                .setPageSize(pageSize)
                 .setEnablePlaceholders(false)
                 .build()
             val executor: Executor = Executors.newFixedThreadPool(5)

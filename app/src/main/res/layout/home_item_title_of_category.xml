@@ -14,10 +14,9 @@
         android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
+            style="?attr/titleTextStyleLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@{title, default=@string/title_default_string}"
-            android:textStyle="bold" />
+            android:text="@{title, default=@string/title_default_string}" />
     </LinearLayout>
 </layout>

@@ -39,14 +39,11 @@
                 app:placeholder="@{@drawable/ic_mic_none}" />
 
             <com.google.android.material.textview.MaterialTextView
+                style="?attr/titleTextStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_margin"
-                android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{podcast.title, default=@string/title_default_podcast_name}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textStyle="bold" />
+                android:text="@{podcast.title, default=@string/title_default_podcast_name}" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.google.android.material.card.MaterialCardView>

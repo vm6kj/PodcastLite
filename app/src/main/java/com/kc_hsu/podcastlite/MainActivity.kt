@@ -71,8 +71,10 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         sheetBehavior = BottomSheetBehavior.from(binding.llPlayer) as LockableBottomSheetBehavior
         sheetBehavior.peekHeight = resources.getDimension(R.dimen.external_player_height).toInt()
-        sheetBehavior.isHideable = false
+        sheetBehavior.isHideable = true
         sheetBehavior.addBottomSheetCallback(bottomSheetCallback)
+        // TODO Hide it by default, not assign any task in it.
+        sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private val bottomSheetCallback: BottomSheetCallback = object : BottomSheetCallback() {

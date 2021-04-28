@@ -40,6 +40,9 @@
         <item name="colorControlNormal">@color/white</item>
 
         <item name="vectorDrawableColor">@color/greyInLight</item>
+        <item name="titleTextStyleLarge">@style/TitleText.Large.Light</item>
+        <item name="titleTextStyleNormal">@style/TitleText.Normal.Light</item>
+        <item name="titleTextStyleSmall">@style/TitleText.Small.Light</item>
     </style>
 
     <style name="Theme.Base.PodcastLite.Dark" parent="Theme.MaterialComponents">
@@ -56,6 +59,9 @@
         <item name="android:textColorHint">@color/medium_gray</item>
 
         <item name="vectorDrawableColor">@color/greyInDark</item>
+        <item name="titleTextStyleLarge">@style/TitleText.Large.Dark</item>
+        <item name="titleTextStyleNormal">@style/TitleText.Normal.Dark</item>
+        <item name="titleTextStyleSmall">@style/TitleText.Small.Dark</item>
     </style>
 
     <style name="Widget.PodcastLite.ActionBar.Light" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
@@ -70,4 +76,50 @@
         <item name="android:windowEnterAnimation">@anim/slide_out_from_top</item>
         <item name="android:windowExitAnimation">@anim/slide_back_to_top</item>
     </style>
+
+    <!--  Text  -->
+    <style name="TitleText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:padding">@dimen/item_title_padding</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TitleText.Large">
+        <item name="android:textSize">@dimen/title_text_size_large</item>
+    </style>
+
+    <style name="TitleText.Normal">
+        <item name="android:textSize">@dimen/title_text_size_normal</item>
+    </style>
+
+    <style name="TitleText.Small">
+        <item name="android:textSize">@dimen/title_text_size_small</item>
+    </style>
+
+    <style name="TitleText.Large.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TitleText.Large.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TitleText.Normal.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TitleText.Normal.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TitleText.Small.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TitleText.Small.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

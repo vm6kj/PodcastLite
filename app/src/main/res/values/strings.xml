@@ -10,6 +10,17 @@
 
     <!--  Home Fragment  -->
     <string name="title_default_string">Title Header</string>
+
+    <string name="genre_personal_finance">Personal Finance</string>
+    <string name="genre_locally_focused">Locally Focused</string>
+    <string name="genre_science">Science</string>
+    <string name="genre_music">Music</string>
+    <string name="genre_news">News</string>
+    <string name="genre_religion_and_spirituality">Religion &amp; Spirituality</string>
+    <string name="genre_business">Business</string>
+    <string name="genre_comedy">Comedy</string>
+    <string name="genre_society_and_culture">Society &amp; Culture</string>
+    <string name="genre_fiction">Fiction</string>
     <!--  Card of Best Podcast  -->
     <string name="title_default_podcast_name">Podcast Name</string>
 

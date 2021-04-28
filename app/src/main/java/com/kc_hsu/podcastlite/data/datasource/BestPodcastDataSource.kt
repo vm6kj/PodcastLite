@@ -1,7 +1,8 @@
-package com.kc_hsu.podcastlite.data
+package com.kc_hsu.podcastlite.data.datasource
 
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
+import com.kc_hsu.podcastlite.data.PodcastApi
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.utils.NetworkState
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class BestPodcastDataSource(
             initLoadState.value = NetworkState.LOADING
 
             // TODO `region` should be get from global
-            api.bestPodcasts(genreId, currentPage, "tw", 0).run {
+            api.bestPodcasts(genreId, currentPage, "us", 0).run {
                 if (!this.isSuccessful) {
                     initLoadState.value = NetworkState.ERROR
                 }
@@ -64,7 +65,7 @@ class BestPodcastDataSource(
         }
         GlobalScope.launch(Dispatchers.IO) {
             loadMoreState.value = NetworkState.LOADING
-            api.bestPodcasts(genreId, params.key, "tw", 0).run {
+            api.bestPodcasts(genreId, params.key, "us", 0).run {
                 if (!this.isSuccessful) {
                     loadMoreState.value = NetworkState.ERROR
                 }
@@ -92,7 +93,7 @@ class BestPodcastDataSource(
     }
 }
 
-class BestPodcastDataSourceFactory :
+class BestPodcastDataSourceFactory(private val genreId: Int) :
     DataSource.Factory<Int, BestPodcastsBody.Podcast>() {
 
     private val _initLoadState = MutableStateFlow(NetworkState.IDLE)
@@ -105,7 +106,7 @@ class BestPodcastDataSourceFactory :
 
     override fun create(): DataSource<Int, BestPodcastsBody.Podcast> {
         // TODO KCTEST genreId should be inject from outside
-        dataSource = BestPodcastDataSource(93, _initLoadState, _loadMoreState)
+        dataSource = BestPodcastDataSource(genreId, _initLoadState, _loadMoreState)
         return dataSource!!
     }
 }
