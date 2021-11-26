@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import timber.log.Timber
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -22,6 +23,7 @@ class AutoClearedValue<T : Any> : ReadWriteProperty<Fragment, T>, LifecycleObser
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
+        Timber.d("KCTESTonDestroy() set value to null")
         _value = null
     }
 }

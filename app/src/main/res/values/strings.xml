@@ -24,6 +24,10 @@
     <!--  Card of Best Podcast  -->
     <string name="title_default_podcast_name">Podcast Name</string>
 
+    <!--  Album Fragment  -->
+    <string name="tab_name_recent_added">Recent Added</string>
+    <string name="tab_name_total_added">Total Added</string>
+
     <!--  Preferences  -->
     <string name="settings_title">Settings</string>
     <string name="user_interface_label">User Interface</string>

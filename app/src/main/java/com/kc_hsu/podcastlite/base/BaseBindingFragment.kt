@@ -32,4 +32,8 @@ abstract class BaseBindingFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutR
         binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.viewmodel, viewModel)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }
