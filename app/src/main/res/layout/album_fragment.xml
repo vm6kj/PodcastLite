@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.album.AlbumFragment">
+        android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout_album"
@@ -26,9 +24,14 @@
                 android:text="@string/tab_name_total_added" />
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_host_in_album"
+        <com.kc_hsu.podcastlite.ui.view.NestedScrollableHost
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_host_in_album"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.kc_hsu.podcastlite.ui.view.NestedScrollableHost>
     </LinearLayout>
 </layout>

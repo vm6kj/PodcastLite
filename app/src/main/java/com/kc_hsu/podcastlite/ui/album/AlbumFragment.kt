@@ -1,6 +1,7 @@
 package com.kc_hsu.podcastlite.ui.album
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -53,7 +54,6 @@ class AlbumFragment :
                 override fun onPageSelected(position: Int) {
                     // tablayout change
                     binding.tablayoutAlbum.getTabAt(position)?.select()
-//                    currentItem = position
                 }
             })
 
@@ -61,15 +61,16 @@ class AlbumFragment :
                 override fun getItemCount() = 2
 
                 override fun createFragment(position: Int): Fragment {
+                    Timber.d("KCTEST position $position")
                     return when (position) {
                         0 -> RecentAddedFragment.newInstance()
                         1 -> TotalAddedFragment.newInstance()
                         else -> throw IllegalStateException("Error fragment position!")
                     }
                 }
-            }
 
-            requestDisallowInterceptTouchEvent(false)
+
+            }
         }
 
         binding.tablayoutAlbum.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
@@ -87,11 +88,7 @@ class AlbumFragment :
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> RecentAddedFragment.newInstance()
-                    1 -> TotalAddedFragment.newInstance()
-                    else -> throw IllegalStateException("Error fragment position!")
-                }
+
             }
 
         })
@@ -105,15 +102,10 @@ class AlbumFragment :
             }
         )
 
-        tabLayoutMediator = TabLayoutMediator(binding.tablayoutAlbum, binding.vpHostInAlbum) { tablayout, viewPager ->
-
+        tabLayoutMediator = TabLayoutMediator(binding.tablayoutAlbum, binding.vpHostInAlbum) { tab, position ->
+            tab.text = "AAAAA"
         }
 
         tabLayoutMediator.attach()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        tabLayoutMediator.detach()
     }
 }

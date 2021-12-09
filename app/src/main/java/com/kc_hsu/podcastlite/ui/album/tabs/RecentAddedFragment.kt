@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kc_hsu.podcastlite.R
+import timber.log.Timber
 
 class RecentAddedFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RecentAddedFragment()
+        fun newInstance(): RecentAddedFragment {
+            Timber.d("RecentAddedFragment create!")
+            return RecentAddedFragment()
+        }
     }
 
     private lateinit var viewModel: RecentAddedViewModel

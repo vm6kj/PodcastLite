@@ -23,7 +23,6 @@ class AutoClearedValue<T : Any> : ReadWriteProperty<Fragment, T>, LifecycleObser
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
-        Timber.d("KCTESTonDestroy() set value to null")
         _value = null
     }
 }
