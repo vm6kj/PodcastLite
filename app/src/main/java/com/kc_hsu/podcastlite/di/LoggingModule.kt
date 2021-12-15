@@ -20,7 +20,7 @@ val loggingModule = module {
 
     single<FormatStrategy> {
         PrettyFormatStrategy.newBuilder()
-            .tag("kc_hsu")
+            .tag("KCTEST")
             .methodCount(3)
             .methodOffset(5) // avoid timber internal stack track
             .build()

@@ -68,4 +68,13 @@ object PodcastRepo : KoinComponent {
             refresh = { bestPodcastDataSourceFactory.dataSource?.invalidate() }
         )
     }
+
+    suspend fun getBestPodcasts(genreId: Int): BestPodcastsBody? {
+        val response = api.bestPodcasts(genreId = genreId)
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
+    }
 }

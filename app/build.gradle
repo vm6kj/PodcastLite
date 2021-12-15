@@ -51,6 +51,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
@@ -60,7 +61,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
@@ -132,6 +133,9 @@ dependencies {
     implementation "com.airbnb.android:epoxy-paging:$epoxy_version"
     implementation "com.airbnb.android:epoxy-paging3:$epoxy_version"
     kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
+
+    // Banner (https://github.com/youth5201314/banner)
+    implementation 'io.github.youth5201314:banner:2.2.2'
 }
 
 task ktlint(type: JavaExec, group: "verification") {
