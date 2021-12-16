@@ -18,14 +18,15 @@ class BestPodcastController : PagedListEpoxyController<BestPodcastsBody.Podcast>
         currentPosition: Int,
         item: BestPodcastsBody.Podcast?
     ): EpoxyModel<*> {
-        return item?.run {
-            BestPodcastBindingModel_()
-                .id(this.id)
-                .podcast(this)
-        } ?: run {
-            BestPodcastBindingModel_()
-                .id(-currentPosition)
-        }
+        return BestPodcastBindingModel_()
+        // return item?.run {
+        //     BestPodcastBindingModel_()
+        //         .id(this.id)
+        //         .podcast(this)
+        // } ?: run {
+        //     BestPodcastBindingModel_()
+        //         .id(-currentPosition)
+        // }
     }
 
     // TODO Adding a loading view

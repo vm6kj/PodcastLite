@@ -1,50 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_best_podcast"
+    android:layout_width="@dimen/card_width"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:stateListAnimator="@animator/card_view_clicked"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false"
+    app:rippleColor="@android:color/transparent">
 
-    <data>
-
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="podcast"
-            type="com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody.Podcast" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/card_width"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="@{clickListener}"
-        android:stateListAnimator="@animator/card_view_clicked"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="0dp"
-        app:cardPreventCornerOverlap="false"
-        app:rippleColor="@android:color/transparent">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
+            android:id="@+id/iv_podcast_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_podcast_name"
+            style="?attr/titleTextStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="fitCenter"
-                app:error="@{@drawable/ic_handyman}"
-                app:imageUrl="@{podcast.image}"
-                app:placeholder="@{@drawable/ic_mic_none}" />
-
-            <com.google.android.material.textview.MaterialTextView
-                style="?attr/titleTextStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:text="@{podcast.title, default=@string/title_default_podcast_name}" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </com.google.android.material.card.MaterialCardView>
-</layout>
+            android:maxLines="2" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</com.google.android.material.card.MaterialCardView>

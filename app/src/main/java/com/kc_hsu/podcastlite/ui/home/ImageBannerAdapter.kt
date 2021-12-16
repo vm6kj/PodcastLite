@@ -16,7 +16,6 @@ class ImageBannerAdapter(bestPodcastsBody: BestPodcastsBody) : BannerAdapter<Bes
     override fun onCreateHolder(parent: ViewGroup?, viewType: Int): ImageBannerViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val binding = HomeBannerImageBinding.inflate(layoutInflater, parent, false)
-        BannerUtils.setBannerRound(binding.ivBanner, 20f)
         return ImageBannerViewHolder(binding)
     }
 

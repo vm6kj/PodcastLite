@@ -2,11 +2,13 @@ package com.kc_hsu.podcastlite.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
-import com.youth.banner.indicator.BaseIndicator
+import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
+import com.youth.banner.transformer.ScaleInTransformer
 
 class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcastsBody) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -22,7 +24,7 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
             VIEW_TYPE_BANNER -> {
                 BannerViewHolder(HomeBannerBinding.inflate(layoutInflater, parent, false))
             }
-            else -> BannerViewHolder(HomeBannerBinding.inflate(layoutInflater, parent, false))
+            else -> CarouselViewHolder(HomeCarouselListBinding.inflate(layoutInflater, parent, false))
         }
     }
 
@@ -32,11 +34,15 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
                 val adapter = ImageBannerAdapter(bestPodcastsBody)
                 holder.bind(adapter)
             }
+            is CarouselViewHolder -> {
+                val adapter = BestPodcastCarouselAdapter(bestPodcastsBody)
+                holder.bind(adapter)
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 5
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -59,6 +65,7 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
             binding.bannerBestPodcasts.apply {
                 setAdapter(adapter)
                 setIndicator(BannerIndicator(context))
+                addPageTransformer(ScaleInTransformer())
                 setOnBannerListener { data, position ->
                     Snackbar.make(
                         this,
@@ -67,6 +74,17 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
                     ).show()
                 }
             }
+        }
+    }
+
+    inner class CarouselViewHolder(private val binding: HomeCarouselListBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(adapter: BestPodcastCarouselAdapter) {
+            with(binding.rvCarousel) {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                setAdapter(adapter)
+            }
+            binding.tvListTitle.text = bestPodcastsBody.name
         }
     }
 }
