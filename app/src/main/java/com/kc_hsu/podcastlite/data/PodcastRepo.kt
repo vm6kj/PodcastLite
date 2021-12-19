@@ -70,7 +70,7 @@ object PodcastRepo : KoinComponent {
     }
 
     suspend fun getBestPodcasts(genreId: Int): BestPodcastsBody? {
-        val response = api.bestPodcasts(genreId = genreId)
+        val response = api.bestPodcasts(genreId = genreId, page = 1, region = "us")
         return if (response.isSuccessful) {
             response.body()
         } else {

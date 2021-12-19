@@ -10,12 +10,18 @@ import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
 import com.youth.banner.transformer.ScaleInTransformer
 
-class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcastsBody) :
+class HomeAdapter internal constructor(private val bestPodcastsBody: ArrayList<BestPodcastsBody>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_BANNER = 0
         private const val VIEW_TYPE_HORIZONTAL_SCROLL = 1
+    }
+
+    fun updateData(bestPodcasts: List<BestPodcastsBody>) {
+//        listOfBestPodcasts.add(bestPodcasts)
+        bestPodcastsBody.addAll(bestPodcasts)
+//        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,18 +37,18 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BannerViewHolder -> {
-                val adapter = ImageBannerAdapter(bestPodcastsBody)
+                val adapter = ImageBannerAdapter(bestPodcastsBody[position])
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
-                val adapter = BestPodcastCarouselAdapter(bestPodcastsBody)
+                val adapter = BestPodcastCarouselAdapter(bestPodcastsBody[position])
                 holder.bind(adapter)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return bestPodcastsBody.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -84,7 +90,7 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: BestPodcast
                 setHasFixedSize(true)
                 setAdapter(adapter)
             }
-            binding.tvListTitle.text = bestPodcastsBody.name
+            binding.tvListTitle.text = bestPodcastsBody[layoutPosition].name
         }
     }
 }
