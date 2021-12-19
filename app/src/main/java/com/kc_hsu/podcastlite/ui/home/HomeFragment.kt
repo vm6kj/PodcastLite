@@ -20,7 +20,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     private val viewModel = HomeViewModel()
-    val homeAdapter = HomeAdapter(arrayListOf())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +28,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     private fun loadView() {
+        val homeAdapter = HomeAdapter()
         with(binding.rvHome) {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(
@@ -38,36 +38,36 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
             )
         }
 
-        val list = ArrayList<BestPodcastsBody>()
         PodcastGenres.values().forEachIndexed { index, genre ->
             // val bestPodcastListing = viewModel.getBestPodcastList(genre.genreId)
             viewModel.getBestPodcasts(genre.genreId)
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.homeState
-                    .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                    .collect {
-                        when (it) {
-                            is HomeDataState.Idle -> {
+        }
 
-                            }
-                            is HomeDataState.Loading -> {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.homeState
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    when (it) {
+                        is HomeDataState.Idle -> {
 
-                            }
-                            is HomeDataState.Success -> {
-                                // TODO problems here!!!
-                                Timber.d("HomeDataState.Success")
+                        }
+                        is HomeDataState.Loading -> {
+                            Timber.d("HomeDataState.Loading")
+                        }
+                        is HomeDataState.Success -> {
+                            // TODO problems here!!!
+                            Timber.d("HomeDataState.Success")
 //                                homeAdapter.updateData(it.data)
-                                list.add(it.data)
-                                Timber.d("homeAdapter.updateData(list)")
-                                homeAdapter.updateData(list)
-                                homeAdapter.notifyDataSetChanged()
-                            }
-                            is HomeDataState.Error<*> -> {
 
-                            }
+                            Timber.d("homeAdapter.updateData(list)")
+                            homeAdapter.updateData(it.data)
+//                            homeAdapter.notifyDataSetChanged()
+                        }
+                        is HomeDataState.Error<*> -> {
+                            Timber.e("HomeDataState.Error: $it.error")
                         }
                     }
-            }
+                }
         }
     }
 }

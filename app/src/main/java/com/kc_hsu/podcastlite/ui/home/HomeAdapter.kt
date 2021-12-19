@@ -9,8 +9,9 @@ import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
 import com.youth.banner.transformer.ScaleInTransformer
+import timber.log.Timber
 
-class HomeAdapter internal constructor(private val bestPodcastsBody: ArrayList<BestPodcastsBody>) :
+class HomeAdapter internal constructor() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -18,10 +19,10 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: ArrayList<B
         private const val VIEW_TYPE_HORIZONTAL_SCROLL = 1
     }
 
-    fun updateData(bestPodcasts: List<BestPodcastsBody>) {
-//        listOfBestPodcasts.add(bestPodcasts)
-        bestPodcastsBody.addAll(bestPodcasts)
-//        notifyDataSetChanged()
+    private var listOfBestPodcasts = mutableListOf<BestPodcastsBody>()
+    fun updateData(bestPodcasts: BestPodcastsBody) {
+       listOfBestPodcasts.add(bestPodcasts)
+       notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,18 +38,19 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: ArrayList<B
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BannerViewHolder -> {
-                val adapter = ImageBannerAdapter(bestPodcastsBody[position])
+                val adapter = ImageBannerAdapter(listOfBestPodcasts[position])
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
-                val adapter = BestPodcastCarouselAdapter(bestPodcastsBody[position])
+                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position])
                 holder.bind(adapter)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return bestPodcastsBody.size
+        Timber.d("getItemCount: ${listOfBestPodcasts.size}")
+        return listOfBestPodcasts.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -90,7 +92,7 @@ class HomeAdapter internal constructor(private val bestPodcastsBody: ArrayList<B
                 setHasFixedSize(true)
                 setAdapter(adapter)
             }
-            binding.tvListTitle.text = bestPodcastsBody[layoutPosition].name
+            binding.tvListTitle.text = listOfBestPodcasts[layoutPosition].name
         }
     }
 }
