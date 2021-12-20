@@ -6,10 +6,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.exoplayer2.util.TimedValueQueue
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -24,6 +26,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Timber.d("onViewCreated!!!")
         loadView()
     }
 
@@ -38,33 +41,29 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
             )
         }
 
-        PodcastGenres.values().forEachIndexed { index, genre ->
-            // val bestPodcastListing = viewModel.getBestPodcastList(genre.genreId)
-            viewModel.getBestPodcasts(genre.genreId)
-        }
+        viewModel.getBestPodcasts()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.homeState
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                 .collect {
+                    Timber.d("Find collect data: $it")
                     when (it) {
                         is HomeDataState.Idle -> {
-
+                            homeAdapter.loadMore(false)
                         }
                         is HomeDataState.Loading -> {
                             Timber.d("HomeDataState.Loading")
+                            homeAdapter.loadMore(true)
                         }
                         is HomeDataState.Success -> {
-                            // TODO problems here!!!
-                            Timber.d("HomeDataState.Success")
-//                                homeAdapter.updateData(it.data)
-
                             Timber.d("homeAdapter.updateData(list)")
+                            homeAdapter.loadMore(false)
                             homeAdapter.updateData(it.data)
-//                            homeAdapter.notifyDataSetChanged()
                         }
                         is HomeDataState.Error<*> -> {
                             Timber.e("HomeDataState.Error: $it.error")
+                            homeAdapter.loadMore(false)
                         }
                     }
                 }

@@ -6,9 +6,9 @@
 
     <TextView
         android:id="@+id/tv_banner_title"
+        style="?attr/titleTextStyleLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RRRRRR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

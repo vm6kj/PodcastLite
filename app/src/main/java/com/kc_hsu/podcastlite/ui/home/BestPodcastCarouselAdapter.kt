@@ -38,8 +38,6 @@ class BestPodcastCarouselAdapter(private val bestPodcastsBody: BestPodcastsBody)
                 Glide.with(itemView)
                     .load(podcast.image)
                     .placeholder(R.drawable.ic_mic_none)
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(ivPodcastImage)
                 tvPodcastName.text = podcast.title
             }
