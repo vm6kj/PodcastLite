@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_list_title" />
 
-    <com.kc_hsu.podcastlite.ui.view.NestedScrollableHost
+    <com.kc_hsu.podcastlite.screen.view.NestedScrollableHost
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +33,6 @@
             android:id="@+id/rv_carousel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </com.kc_hsu.podcastlite.ui.view.NestedScrollableHost>
+    </com.kc_hsu.podcastlite.screen.view.NestedScrollableHost>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

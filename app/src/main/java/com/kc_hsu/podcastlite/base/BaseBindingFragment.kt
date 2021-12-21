@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import com.kc_hsu.podcastlite.BR
 
 abstract class BaseBindingFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutRes private val layoutResourceId: Int) :
     Fragment() {

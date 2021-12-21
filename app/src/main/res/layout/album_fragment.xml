@@ -24,7 +24,7 @@
                 android:text="@string/tab_name_total_added" />
         </com.google.android.material.tabs.TabLayout>
 
-        <com.kc_hsu.podcastlite.ui.view.NestedScrollableHost
+        <com.kc_hsu.podcastlite.screen.view.NestedScrollableHost
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -32,6 +32,6 @@
                 android:id="@+id/vp_host_in_album"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </com.kc_hsu.podcastlite.ui.view.NestedScrollableHost>
+        </com.kc_hsu.podcastlite.screen.view.NestedScrollableHost>
     </LinearLayout>
 </layout>

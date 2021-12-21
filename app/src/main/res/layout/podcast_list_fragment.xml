@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/background_elevated"
-        tools:context="com.kc_hsu.podcastlite.ui.podcastlist.PodcastListFragment">
+        tools:context="com.kc_hsu.podcastlite.screen.podcastlist.PodcastListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_podcast_list"

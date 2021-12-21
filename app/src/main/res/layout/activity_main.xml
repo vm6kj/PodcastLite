@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:background="?attr/background_elevated"
             android:orientation="vertical"
-            app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
+            app:layout_behavior="com.kc_hsu.podcastlite.screen.view.LockableBottomSheetBehavior">
 
             <TextView
                 android:layout_width="match_parent"

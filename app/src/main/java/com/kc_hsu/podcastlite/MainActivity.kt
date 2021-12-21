@@ -2,8 +2,6 @@ package com.kc_hsu.podcastlite
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,12 +14,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.kc_hsu.podcastlite.base.BaseActivity
 import com.kc_hsu.podcastlite.customview.TopSheetDialog
 import com.kc_hsu.podcastlite.databinding.ActivityMainBinding
-import com.kc_hsu.podcastlite.ui.album.AlbumFragment
-import com.kc_hsu.podcastlite.ui.home.HomeFragment
-import com.kc_hsu.podcastlite.ui.preferences.PreferenceActivity
-import com.kc_hsu.podcastlite.ui.search.SearchFragment
-import com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior
-import org.koin.androidx.fragment.android.setupKoinFragmentFactory
+import com.kc_hsu.podcastlite.screen.album.AlbumFragment
+import com.kc_hsu.podcastlite.screen.home.HomeFragment
+import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
+import com.kc_hsu.podcastlite.screen.search.SearchFragment
+import com.kc_hsu.podcastlite.screen.view.LockableBottomSheetBehavior
 import timber.log.Timber
 
 /**

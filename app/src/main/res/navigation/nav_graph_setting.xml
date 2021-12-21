@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/preferenceFragment"
-        android:name="com.kc_hsu.podcastlite.ui.preferences.MainPreferenceFragment"
+        android:name="com.kc_hsu.podcastlite.screen.preferences.MainPreferenceFragment"
         android:label="preference_fragment"
         tools:layout="@layout/preference_fragment" />
 

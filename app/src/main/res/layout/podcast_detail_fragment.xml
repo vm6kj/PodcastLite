@@ -1,45 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="imageurl"
-            type="String" />
-
-        <variable
-            name="collectioname"
-            type="String" />
-
-        <variable
-            name="artistname"
-            type="String" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/background_elevated"
-        android:padding="16dp"
-        tools:context="com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailFragment">
+        android:padding="16dp" >
 
         <RelativeLayout
             android:id="@+id/rl_podcast_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
+            android:paddingBottom="@dimen/common_padding"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
                 android:id="@+id/iv_cover"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:src="@color/greyInLight"
-                app:error="@{@color/greyInLight}"
-                app:imageUrl="@{imageurl}"
-                app:placeholder="@{@color/greyInLight}" />
+                android:src="@color/greyInLight" />
 
             <TextView
                 android:id="@+id/tv_podcast_name"
@@ -49,7 +28,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/iv_cover"
-                android:text="@{collectioname}"
                 android:textColor="?attr/textColor"
                 android:textSize="20sp" />
 
@@ -61,7 +39,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/iv_cover"
-                android:text="@{artistname}"
                 android:textColor="?attr/metaTextColor" />
         </RelativeLayout>
 
@@ -76,11 +53,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_podcast_detail_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_all_episodes" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
