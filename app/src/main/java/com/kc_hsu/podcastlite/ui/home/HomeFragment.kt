@@ -24,8 +24,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Timber.d("onViewCreated!!!")
         loadView()
     }
 
@@ -69,6 +67,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
-        Timber.d("onPodcastClick: ${podcast.title}")
+
     }
 }

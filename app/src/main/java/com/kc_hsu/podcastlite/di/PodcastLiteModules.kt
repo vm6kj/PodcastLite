@@ -9,14 +9,6 @@ import com.kc_hsu.podcastlite.ui.album.AlbumFragment
 import com.kc_hsu.podcastlite.ui.album.AlbumViewModel
 import com.kc_hsu.podcastlite.ui.home.HomeFragment
 import com.kc_hsu.podcastlite.ui.home.HomeViewModel
-import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailAdapter
-import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailFragment
-import com.kc_hsu.podcastlite.ui.podcastdetail.PodcastDetailViewModel
-import com.kc_hsu.podcastlite.ui.podcastlist.PodcastListAdapter
-import com.kc_hsu.podcastlite.ui.podcastlist.PodcastListFragment
-import com.kc_hsu.podcastlite.ui.podcastlist.PodcastListViewModel
-import com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerFragment
-import com.kc_hsu.podcastlite.ui.podcastplayer.PodcastPlayerViewModel
 import com.kc_hsu.podcastlite.ui.preferences.MainPreferenceFragment
 import com.kc_hsu.podcastlite.ui.search.SearchFragment
 import com.kc_hsu.podcastlite.ui.search.SearchViewModel
@@ -29,9 +21,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val fragmentModule = module {
-    fragment { PodcastListFragment(get()) }
-    fragment { PodcastDetailFragment(get()) }
-    fragment { PodcastPlayerFragment() }
 
     fragment { HomeFragment() }
     fragment { SearchFragment() }
@@ -40,23 +29,12 @@ val fragmentModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { PodcastListViewModel() }
-    viewModel { PodcastDetailViewModel() }
-    viewModel { PodcastPlayerViewModel() }
-
     viewModel { HomeViewModel() }
     viewModel { SearchViewModel() }
     viewModel { AlbumViewModel() }
 }
 
 val listAdapterModule = module {
-    factory { (podcastListViewModel: PodcastListViewModel) ->
-        PodcastListAdapter(podcastListViewModel)
-    }
-
-    factory { (podcastDetailViewModel: PodcastDetailViewModel) ->
-        PodcastDetailAdapter(podcastDetailViewModel)
-    }
 }
 
 val networkModule = module {

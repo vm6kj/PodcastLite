@@ -30,7 +30,8 @@ abstract class BaseBindingFragment<B : ViewDataBinding, VM : ViewModel>(@LayoutR
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.setVariable(BR.viewmodel, viewModel)
+        // TODO Uncomment it when using data binding
+        // binding.setVariable(BR.viewmodel, viewModel)
     }
 
     override fun onDestroyView() {

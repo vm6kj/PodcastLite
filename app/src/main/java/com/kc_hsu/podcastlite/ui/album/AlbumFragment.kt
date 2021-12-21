@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.base.AutoClearedValue
 import com.kc_hsu.podcastlite.base.BaseBindingFragment
+import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.databinding.AlbumFragmentBinding
 import com.kc_hsu.podcastlite.ui.album.tabs.RecentAddedFragment
 import com.kc_hsu.podcastlite.ui.album.tabs.TotalAddedFragment
@@ -22,16 +23,13 @@ import org.koin.core.KoinComponent
 import timber.log.Timber
 import java.lang.IllegalStateException
 
-class AlbumFragment :
-    BaseBindingFragment<AlbumFragmentBinding, AlbumViewModel>(R.layout.album_fragment),
-    KoinComponent {
-
-    override val viewModel: AlbumViewModel by viewModel()
+class AlbumFragment : BaseViewBindingFragment<AlbumFragmentBinding>(AlbumFragmentBinding::inflate) {
 
     companion object {
         fun newInstance() = AlbumFragment()
     }
 
+    private var viewModel = AlbumViewModel()
     private var tabLayoutMediator by AutoClearedValue<TabLayoutMediator>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
