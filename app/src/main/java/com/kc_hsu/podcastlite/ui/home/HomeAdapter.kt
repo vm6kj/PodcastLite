@@ -14,7 +14,7 @@ import com.kc_hsu.podcastlite.ui.helpers.SpacesItemDecoration
 import com.youth.banner.transformer.ScaleInTransformer
 import timber.log.Timber
 
-class HomeAdapter internal constructor() :
+class HomeAdapter internal constructor(private val listener: PodcastClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -26,9 +26,11 @@ class HomeAdapter internal constructor() :
     private var loadingState: HomeDataState = HomeDataState.Idle
 
     private var listOfBestPodcasts = mutableListOf<BestPodcastsBody>()
-    fun updateData(bestPodcasts: BestPodcastsBody) {
-        listOfBestPodcasts.add(bestPodcasts)
-        notifyItemInserted(listOfBestPodcasts.size)
+    fun updateData(bestPodcasts: List<BestPodcastsBody>) {
+        bestPodcasts.subList(listOfBestPodcasts.size, bestPodcasts.size).forEachIndexed { index, bestPodcastsBody ->
+            listOfBestPodcasts.add(bestPodcastsBody)
+            notifyItemInserted(listOfBestPodcasts.size)
+        }
     }
 
     fun loadMore(shouldLoadMore: Boolean) {
@@ -62,7 +64,7 @@ class HomeAdapter internal constructor() :
             }
             is CarouselViewHolder -> {
                 Timber.d("is CarouselViewHolder")
-                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position])
+                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position], listener)
                 holder.bind(adapter)
             }
             is LoadMoreViewHolder -> {

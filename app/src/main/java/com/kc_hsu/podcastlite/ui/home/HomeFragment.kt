@@ -6,16 +6,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.exoplayer2.util.TimedValueQueue
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
+class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate),
+    PodcastClickListener {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -31,7 +30,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     private fun loadView() {
-        val homeAdapter = HomeAdapter()
+        val homeAdapter = HomeAdapter(this)
         with(binding.rvHome) {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(
@@ -42,10 +41,9 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
         }
 
         viewModel.getBestPodcasts()
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.homeState
-                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.CREATED)
                 .collect {
                     Timber.d("Find collect data: $it")
                     when (it) {
@@ -68,5 +66,9 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
                     }
                 }
         }
+    }
+
+    override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
+        Timber.d("onPodcastClick: ${podcast.title}")
     }
 }
