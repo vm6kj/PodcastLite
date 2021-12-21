@@ -1,5 +1,6 @@
 package com.kc_hsu.podcastlite.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Lifecycle
@@ -9,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
+import com.kc_hsu.podcastlite.ui.preferences.PreferenceActivity
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate),
-    PodcastClickListener {
+class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate), PodcastClickListener, SettingClickListener{
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -28,7 +29,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     private fun loadView() {
-        val homeAdapter = HomeAdapter(this)
+        val homeAdapter = HomeAdapter(this, this)
         with(binding.rvHome) {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(
@@ -68,5 +69,10 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
 
+    }
+
+    override fun onSettingClick() {
+        val intent = Intent(requireContext(), PreferenceActivity::class.java)
+        startActivity(intent)
     }
 }

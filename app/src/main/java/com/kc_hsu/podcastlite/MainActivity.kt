@@ -36,7 +36,6 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private lateinit var view: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         view = binding.root
@@ -117,14 +116,5 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         binding.vpHost.currentItem = item.order
         return true
-    }
-
-    inner class MyHandler : Handler() {
-
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            Timber.e("KCTEST OOM")
-            binding
-        }
     }
 }

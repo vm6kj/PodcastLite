@@ -9,18 +9,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
+import com.kc_hsu.podcastlite.databinding.HomeHeaderBinding
 import com.kc_hsu.podcastlite.databinding.HomeListLoadMoreBinding
 import com.kc_hsu.podcastlite.ui.helpers.SpacesItemDecoration
+import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 import com.youth.banner.transformer.ScaleInTransformer
 import timber.log.Timber
 
-class HomeAdapter internal constructor(private val listener: PodcastClickListener) :
+class HomeAdapter internal constructor(private val podcastClickListener: PodcastClickListener, private val settingClickListener: SettingClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val VIEW_TYPE_FOOT = -1
-        private const val VIEW_TYPE_BANNER = 0
-        private const val VIEW_TYPE_HORIZONTAL_SCROLL = 1
+        private const val VIEW_TYPE_HEADER = 0
+        private const val VIEW_TYPE_BANNER = 1
+        private const val VIEW_TYPE_HORIZONTAL_SCROLL = 2
     }
 
     private var loadingState: HomeDataState = HomeDataState.Idle
@@ -43,9 +46,11 @@ class HomeAdapter internal constructor(private val listener: PodcastClickListene
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Timber.d("onCreateViewHolderQQ")
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
+            VIEW_TYPE_HEADER -> {
+                HeaderViewHolder(HomeHeaderBinding.inflate(layoutInflater, parent, false))
+            }
             VIEW_TYPE_BANNER -> {
                 BannerViewHolder(HomeBannerBinding.inflate(layoutInflater, parent, false))
             }
@@ -58,13 +63,16 @@ class HomeAdapter internal constructor(private val listener: PodcastClickListene
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
+            is HeaderViewHolder -> {
+                holder.bind()
+            }
             is BannerViewHolder -> {
                 val adapter = ImageBannerAdapter(listOfBestPodcasts[position])
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
                 Timber.d("is CarouselViewHolder")
-                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position], listener)
+                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position], podcastClickListener)
                 holder.bind(adapter)
             }
             is LoadMoreViewHolder -> {
@@ -83,15 +91,29 @@ class HomeAdapter internal constructor(private val listener: PodcastClickListene
         //     return VIEW_TYPE_FOOT
         // }
         return when (position) {
+            VIEW_TYPE_HEADER -> {
+                VIEW_TYPE_HEADER
+            }
             VIEW_TYPE_BANNER -> {
                 VIEW_TYPE_BANNER
             }
             VIEW_TYPE_HORIZONTAL_SCROLL -> {
                 VIEW_TYPE_HORIZONTAL_SCROLL
             }
+            // TODO add a view type list
             else -> {
                 VIEW_TYPE_HORIZONTAL_SCROLL
             }
+        }
+    }
+
+    inner class HeaderViewHolder(private val binding: HomeHeaderBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
+            binding.ivSetting.setOnClickListener(object : DebouncedClickListener() {
+                override fun onDebouncedClick(v: View) {
+                    settingClickListener.onSettingClick()
+                }
+            })
         }
     }
 

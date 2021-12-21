@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!--  Using toolbar by design  -->
+    <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+    <!--        <com.google.android.material.appbar.AppBarLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content">-->
 
-    <data>
+    <!--            <androidx.appcompat.widget.Toolbar-->
+    <!--                android:id="@+id/toolbar"-->
+    <!--                android:background="?attr/toolbarColor"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="?attr/actionBarSize"-->
+    <!--                app:layout_scrollFlags="scroll|enterAlways" />-->
+    <!--        </com.google.android.material.appbar.AppBarLayout>-->
+    <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
-    </data>
-
-    <RelativeLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_host"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_above="@+id/bnv_host"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_host"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bnv_host">
+
+        <LinearLayout
+            android:id="@+id/ll_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bnv_host" />
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bnv_host">
-
-            <LinearLayout
-                android:id="@+id/ll_player"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/background_elevated"
-                android:orientation="vertical"
-                app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Test Sheet" />
-            </LinearLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv_host"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="?attr/background_elevated"
-            app:menu="@menu/host_bottom_nav_menu" />
+            android:orientation="vertical"
+            app:layout_behavior="com.kc_hsu.podcastlite.ui.view.LockableBottomSheetBehavior">
 
-    </RelativeLayout>
-</layout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Test Sheet" />
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv_host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/background_elevated"
+        app:menu="@menu/host_bottom_nav_menu" />
+</RelativeLayout>

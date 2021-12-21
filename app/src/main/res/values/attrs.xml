@@ -7,4 +7,5 @@
     <attr name="titleTextStyleLarge" format="reference" />
     <attr name="titleTextStyleNormal" format="reference" />
     <attr name="titleTextStyleSmall" format="reference" />
+    <attr name="toolbarColor" format="reference" />
 </resources>
