@@ -47,6 +47,9 @@
         <item name="titleTextStyleLarge">@style/TitleText.Large.Light</item>
         <item name="titleTextStyleNormal">@style/TitleText.Normal.Light</item>
         <item name="titleTextStyleSmall">@style/TitleText.Small.Light</item>
+        <item name="textStyleLarge">@style/Text.Large.Light</item>
+        <item name="textStyleNormal">@style/Text.Normal.Light</item>
+        <item name="textStyleSmall">@style/Text.Small.Light</item>
     </style>
 
     <style name="Theme.Base.PodcastLite.Dark" parent="Theme.MaterialComponents.NoActionBar">
@@ -58,7 +61,7 @@
         <item name="android:windowBackground">@color/background_darktheme</item>
         <item name="actionBarStyle">@style/Widget.PodcastLite.ActionBar.Dark</item>
         <item name="toolbarColor">@color/background_darktheme</item>
-        <item name="background_elevated">@color/background_elevated_darktheme</item>
+        <item name="background_elevated">@color/background_darktheme</item>
 
         <item name="android:textAllCaps">false</item>
         <item name="android:textColorHint">@color/medium_gray</item>
@@ -67,6 +70,9 @@
         <item name="titleTextStyleLarge">@style/TitleText.Large.Dark</item>
         <item name="titleTextStyleNormal">@style/TitleText.Normal.Dark</item>
         <item name="titleTextStyleSmall">@style/TitleText.Small.Dark</item>
+        <item name="textStyleLarge">@style/Text.Large.Dark</item>
+        <item name="textStyleNormal">@style/Text.Normal.Dark</item>
+        <item name="textStyleSmall">@style/Text.Small.Dark</item>
     </style>
 
     <style name="Widget.PodcastLite.ActionBar.Light" parent="Widget.MaterialComponents.Light.ActionBar.Solid">
@@ -91,6 +97,12 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="Text">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:padding">@dimen/item_title_padding</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="TitleText.Large">
         <item name="android:textSize">@dimen/title_text_size_large</item>
     </style>
@@ -101,6 +113,18 @@
 
     <style name="TitleText.Small">
         <item name="android:textSize">@dimen/title_text_size_small</item>
+    </style>
+
+    <style name="Text.Large">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="Text.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Text.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
     <style name="TitleText.Large.Dark">
@@ -124,6 +148,30 @@
     </style>
 
     <style name="TitleText.Small.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.Large.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Large.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.Normal.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Normal.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.Small.Dark">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Small.Light">
         <item name="android:textColor">@color/black</item>
     </style>
 

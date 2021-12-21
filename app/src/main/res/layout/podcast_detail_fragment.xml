@@ -2,62 +2,77 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/background_elevated"
-        android:padding="16dp" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background_elevated"
+    android:padding="16dp"
+    tools:context=".screen.podcastdetail.PodcastDetailFragment">
 
-        <RelativeLayout
-            android:id="@+id/rl_podcast_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/common_padding"
-            app:layout_constraintTop_toTopOf="parent">
+    <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="@dimen/image_large"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
-                android:id="@+id/iv_cover"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:src="@color/greyInLight" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="170dp" />
 
-            <TextView
-                android:id="@+id/tv_podcast_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/iv_artist_name"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/iv_cover"
-                android:textColor="?attr/textColor"
-                android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_all_episodes"
+        style="?attr/titleTextStyleLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/all_episodes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h" />
 
-            <TextView
-                android:id="@+id/iv_artist_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_cover"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/iv_cover"
-                android:textColor="?attr/metaTextColor" />
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_podcast_name"
+        style="?attr/titleTextStyleNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/podcast_name" />
 
-        <TextView
-            android:id="@+id/tv_all_episodes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/all_episodes"
-            android:textColor="?attr/textColor"
-            app:layout_constraintTop_toBottomOf="@+id/rl_podcast_desc"
-            tools:layout_editor_absoluteX="16dp" />
+    <TextView
+        android:id="@+id/tv_podcast_description"
+        style="?attr/textStyleNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v"
+        app:layout_constraintTop_toBottomOf="@+id/tv_podcast_name"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/podcast_description" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_podcast_detail_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_all_episodes" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="170dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_podcast_detail_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_all_episodes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

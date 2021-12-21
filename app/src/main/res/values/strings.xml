@@ -38,4 +38,10 @@
     <string name="pref_theme_title_use_system">Use system theme</string>
     <string name="pref_theme_title_light">Light</string>
     <string name="pref_theme_title_dark">Dark</string>
+
+    <!--  Podcast Detail  -->
+    <string name="podcast_name">Podcast Name</string>
+    <string name="podcast_description">Podcast Description</string>
+    <string name="episode_title">Episode Title</string>
+    <string name="episode_description">Episode Description</string>
 </resources>

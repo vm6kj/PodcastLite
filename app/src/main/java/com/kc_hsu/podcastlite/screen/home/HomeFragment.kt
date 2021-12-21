@@ -3,6 +3,7 @@ package com.kc_hsu.podcastlite.screen.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
+import com.kc_hsu.podcastlite.screen.podcastdetail.PodcastDetailFragment
 import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
+import com.kc_hsu.podcastlite.utils.openFragment
+import com.kc_hsu.podcastlite.utils.replaceFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -21,7 +25,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
         fun newInstance() = HomeFragment()
     }
 
-    private val viewModel = HomeViewModel()
+    private val viewModel by activityViewModels<HomeViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,6 +72,8 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
+        // TODO overdraw
+        replaceFragment(PodcastDetailFragment.newInstance())
     }
 
     override fun onSettingClick() {
