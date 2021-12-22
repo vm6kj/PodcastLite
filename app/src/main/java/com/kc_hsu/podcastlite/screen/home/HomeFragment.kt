@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
-import com.kc_hsu.podcastlite.screen.podcastdetail.PodcastDetailFragment
+import com.kc_hsu.podcastlite.screen.podcastepisode.PodcastEpisodeFragment
 import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
 import com.kc_hsu.podcastlite.utils.openFragment
 import kotlinx.coroutines.flow.collect
@@ -71,8 +71,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
     }
 
     override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
-        // TODO overdraw
-        openFragment(PodcastDetailFragment.newInstance(podcast), true)
+        openFragment(PodcastEpisodeFragment.newInstance(podcast), true)
     }
 
     override fun onSettingClick() {

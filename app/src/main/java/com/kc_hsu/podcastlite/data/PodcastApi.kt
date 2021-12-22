@@ -68,7 +68,7 @@ interface PodcastApi {
     // Fetch detailed meta data and episodes for a podcast by id
     suspend fun podcastsById(
         @Path("id") podcastId: String,
-        @Query("next_episode_pub_date") nextEpisodePubDate: Int? = null,
+        @Query("next_episode_pub_date") nextEpisodePubDate: Long? = null,
         @Query("sort") sort: String? = null
     ): Response<PodcastsBody>
 

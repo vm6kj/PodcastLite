@@ -7,6 +7,7 @@ import com.kc_hsu.podcastlite.data.datasource.BestPodcastDataSourceFactory
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.data.responsebody.PodcastBody
 import com.kc_hsu.podcastlite.data.responsebody.PodcastDetailBody
+import com.kc_hsu.podcastlite.data.responsebody.PodcastsBody
 import com.kc_hsu.podcastlite.utils.Listing
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -67,6 +68,15 @@ object PodcastRepo : KoinComponent {
             loadMoreState = bestPodcastDataSourceFactory.loadMoreState,
             refresh = { bestPodcastDataSourceFactory.dataSource?.invalidate() }
         )
+    }
+
+    suspend fun getPodcastEpisode(podcastId: String, nextEpisodePubDate: Long?): PodcastsBody? {
+        val response = api.podcastsById(podcastId = podcastId, nextEpisodePubDate = nextEpisodePubDate, sort = "recent_first")
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
     }
 
     suspend fun getBestPodcasts(genreId: Int): BestPodcastsBody? {

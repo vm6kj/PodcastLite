@@ -7,7 +7,7 @@
     android:background="?attr/background_elevated"
     android:clickable="true"
     android:padding="16dp"
-    tools:context=".screen.podcastdetail.PodcastDetailFragment">
+    tools:context=".screen.podcastepisode.PodcastEpisodeFragment">
 
     <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
         android:id="@+id/iv_cover"

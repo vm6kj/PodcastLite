@@ -13,7 +13,7 @@ data class PodcastsBody(
     @SerializedName("email")
     var email: String?,
     @SerializedName("episodes")
-    var episodes: List<Episode?>?,
+    var episodes: List<Episode>?,
     @SerializedName("explicit_content")
     var explicitContent: Boolean?,
     @SerializedName("extra")
