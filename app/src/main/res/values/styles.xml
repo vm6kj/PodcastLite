@@ -92,14 +92,12 @@
     <style name="TitleText">
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">start|center_vertical</item>
-        <item name="android:padding">@dimen/item_title_padding</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="Text">
         <item name="android:gravity">start|center_vertical</item>
-        <item name="android:padding">@dimen/item_title_padding</item>
         <item name="android:ellipsize">end</item>
     </style>
 

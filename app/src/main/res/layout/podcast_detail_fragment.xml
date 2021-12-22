@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_elevated"
+    android:clickable="true"
     android:padding="16dp"
     tools:context=".screen.podcastdetail.PodcastDetailFragment">
 
@@ -12,9 +13,11 @@
         android:id="@+id/iv_cover"
         android:layout_width="@dimen/image_large"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline_h"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v"
@@ -35,12 +38,11 @@
 
     <TextView
         android:id="@+id/tv_podcast_name"
-        style="?attr/titleTextStyleNormal"
-        android:layout_width="wrap_content"
+        style="?attr/titleTextStyleLarge"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_v"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/podcast_name" />
@@ -48,15 +50,14 @@
     <TextView
         android:id="@+id/tv_podcast_description"
         style="?attr/textStyleNormal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:justificationMode="inter_word"
+        android:maxLines="3"
         app:layout_constraintBottom_toTopOf="@+id/guideline_h"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_v"
         app:layout_constraintTop_toBottomOf="@+id/tv_podcast_name"
-        app:layout_constraintVertical_bias="0.0"
         tools:text="@string/podcast_description" />
 
     <androidx.constraintlayout.widget.Guideline

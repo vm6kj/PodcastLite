@@ -10,7 +10,7 @@ import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeItemBestPodcastBinding
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 
-class BestPodcastCarouselAdapter(private val bestPodcastsBody: BestPodcastsBody, private val listener: PodcastClickListener) : RecyclerView.Adapter<BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>() {
+class BestPodcastCarouselAdapter(val bestPodcastsBody: BestPodcastsBody, private val listener: PodcastClickListener) : RecyclerView.Adapter<BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestPodcastCarouselViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

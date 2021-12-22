@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.base.AutoClearedValue
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.databinding.AlbumFragmentBinding
@@ -21,6 +22,7 @@ class AlbumFragment : BaseViewBindingFragment<AlbumFragmentBinding>(AlbumFragmen
     companion object {
         fun newInstance() = AlbumFragment()
     }
+    private lateinit var tabItemTitles: List<String>
 
     private var viewModel = AlbumViewModel()
     private var tabLayoutMediator by AutoClearedValue<TabLayoutMediator>()
@@ -28,6 +30,7 @@ class AlbumFragment : BaseViewBindingFragment<AlbumFragmentBinding>(AlbumFragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tabItemTitles = arrayListOf(getString(R.string.tab_name_recent_added), getString(R.string.tab_name_total_added))
         with(binding.vpHostInAlbum) {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrollStateChanged(state: Int) {
@@ -87,7 +90,7 @@ class AlbumFragment : BaseViewBindingFragment<AlbumFragmentBinding>(AlbumFragmen
         )
 
         tabLayoutMediator = TabLayoutMediator(binding.tablayoutAlbum, binding.vpHostInAlbum) { tab, position ->
-            tab.text = "AAAAA"
+            tab.text = tabItemTitles[position]
         }
 
         tabLayoutMediator.attach()

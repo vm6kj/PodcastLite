@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeBannerImageBinding
 import com.youth.banner.adapter.BannerAdapter
 
-class ImageBannerAdapter(bestPodcastsBody: BestPodcastsBody) : BannerAdapter<BestPodcastsBody.Podcast, ImageBannerAdapter.ImageBannerViewHolder>(bestPodcastsBody.podcasts) {
+class ImageBannerAdapter(val bestPodcastsBody: BestPodcastsBody) : BannerAdapter<BestPodcastsBody.Podcast, ImageBannerAdapter.ImageBannerViewHolder>(bestPodcastsBody.podcasts) {
 
     override fun onCreateHolder(parent: ViewGroup?, viewType: Int): ImageBannerViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
@@ -32,8 +31,6 @@ class ImageBannerAdapter(bestPodcastsBody: BestPodcastsBody) : BannerAdapter<Bes
             Glide.with(itemView)
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_mic_none)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.ivBanner)
         }
     }

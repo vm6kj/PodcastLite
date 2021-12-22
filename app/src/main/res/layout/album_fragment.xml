@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    tools:context=".screen.album.AlbumFragment">
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_album"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout_album"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_name_recent_added" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_name_total_added" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <com.kc_hsu.podcastlite.screen.view.NestedScrollableHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_host_in_album"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabitem_recentadded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_name_recent_added" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabitem_totaladded"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_name_total_added" />
-        </com.google.android.material.tabs.TabLayout>
-
-        <com.kc_hsu.podcastlite.screen.view.NestedScrollableHost
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_host_in_album"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.kc_hsu.podcastlite.screen.view.NestedScrollableHost>
-    </LinearLayout>
-</layout>
+            android:layout_height="match_parent" />
+    </com.kc_hsu.podcastlite.screen.view.NestedScrollableHost>
+</LinearLayout>

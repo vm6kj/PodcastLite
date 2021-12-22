@@ -24,6 +24,8 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
         private const val VIEW_TYPE_HEADER = 0
         private const val VIEW_TYPE_BANNER = 1
         private const val VIEW_TYPE_HORIZONTAL_SCROLL = 2
+        // TODO write a function to calculate offset for more complex UI
+        private const val sectionOffset = 1
     }
 
     private var loadingState: HomeDataState = HomeDataState.Idle
@@ -67,12 +69,12 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                 holder.bind()
             }
             is BannerViewHolder -> {
-                val adapter = ImageBannerAdapter(listOfBestPodcasts[position])
+                val adapter = ImageBannerAdapter(listOfBestPodcasts[position - sectionOffset])
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
                 Timber.d("is CarouselViewHolder")
-                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position], podcastClickListener)
+                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position - sectionOffset], podcastClickListener)
                 holder.bind(adapter)
             }
             is LoadMoreViewHolder -> {
@@ -83,7 +85,7 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
 
     override fun getItemCount(): Int {
         Timber.d("getItemCount: ${listOfBestPodcasts.size}")
-        return listOfBestPodcasts.size // + if (loadingState == HomeDataState.Loading) 1 else 0
+        return 1 + listOfBestPodcasts.size // + if (loadingState == HomeDataState.Loading) 1 else 0
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -117,10 +119,10 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
         }
     }
 
-    inner class BannerViewHolder(private val binding: HomeBannerBinding) :
+    class BannerViewHolder(private val binding: HomeBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adapter: ImageBannerAdapter) {
-            binding.tvBannerTitle.text = listOfBestPodcasts[layoutPosition].name
+            binding.tvBannerTitle.text = adapter.bestPodcastsBody.name
             binding.bannerBestPodcasts.apply {
                 setAdapter(adapter)
                 setIndicator(BannerIndicator(context))
@@ -136,7 +138,7 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
         }
     }
 
-    inner class CarouselViewHolder(private val binding: HomeCarouselListBinding) :
+    class CarouselViewHolder(private val binding: HomeCarouselListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adapter: BestPodcastCarouselAdapter) {
             with(binding.rvCarousel) {
@@ -146,11 +148,11 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                     addItemDecoration(SpacesItemDecoration())
                 }
             }
-            binding.tvListTitle.text = listOfBestPodcasts[layoutPosition].name
+            binding.tvListTitle.text = adapter.bestPodcastsBody.name
         }
     }
 
-    inner class LoadMoreViewHolder(private val binding: HomeListLoadMoreBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LoadMoreViewHolder(private val binding: HomeListLoadMoreBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(state: HomeDataState) {
             binding.pbLoadMore.visibility = if (state == HomeDataState.Loading) {
                 View.VISIBLE

@@ -14,7 +14,6 @@ import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import com.kc_hsu.podcastlite.screen.podcastdetail.PodcastDetailFragment
 import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
 import com.kc_hsu.podcastlite.utils.openFragment
-import com.kc_hsu.podcastlite.utils.replaceFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -73,7 +72,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
         // TODO overdraw
-        replaceFragment(PodcastDetailFragment.newInstance())
+        openFragment(PodcastDetailFragment.newInstance(podcast), true)
     }
 
     override fun onSettingClick() {

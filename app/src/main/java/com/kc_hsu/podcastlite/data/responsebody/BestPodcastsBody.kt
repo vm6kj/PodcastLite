@@ -1,6 +1,7 @@
 package com.kc_hsu.podcastlite.data.responsebody
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class BestPodcastsBody(
     @SerializedName("has_next")
@@ -76,7 +77,7 @@ data class BestPodcastsBody(
         var type: String?,
         @SerializedName("website")
         var website: String?
-    ) {
+    ) : Serializable {
         data class Extra(
             @SerializedName("facebook_handle")
             var facebookHandle: String?,

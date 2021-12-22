@@ -9,17 +9,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import timber.log.Timber
 
-class HomeViewModel : ViewModel(), KoinComponent {
+class HomeViewModel : ViewModel() {
 
     private val _homeState = MutableStateFlow<HomeDataState>(HomeDataState.Idle)
     val homeState = _homeState.asStateFlow()
 
     fun getBestPodcasts() {
         viewModelScope.launch(Dispatchers.IO) {
-            val bestPodcastsBodys = arrayListOf<BestPodcastsBody>()
+            val bestPodcastsBodies = arrayListOf<BestPodcastsBody>()
             PodcastGenres.values().forEachIndexed { index, podcastGenres ->
                 Timber.d("getBestPodcasts: ${podcastGenres.genreId}")
                 _homeState.update { HomeDataState.Loading }
@@ -29,13 +28,13 @@ class HomeViewModel : ViewModel(), KoinComponent {
                             return@let HomeDataState.Error("Cannot fetch best podcast")
                         }
                         // TODO Remove shuffle before release
-                        bestPodcastsBodys.add(
+                        bestPodcastsBodies.add(
                             it.copy(
                                 name = "${it.name}_$index",
                                 podcasts = it.podcasts?.shuffled()
                             )
                         )
-                        return@let HomeDataState.Success(bestPodcastsBodys)
+                        return@let HomeDataState.Success(bestPodcastsBodies)
                     } ?: HomeDataState.Error("Cannot fetch best podcast")
                 }
             }
