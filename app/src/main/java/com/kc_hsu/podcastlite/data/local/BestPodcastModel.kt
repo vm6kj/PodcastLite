@@ -6,30 +6,30 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(
-    tableName = "bestpodcast_list",
-    primaryKeys = ["genre_id"],
-    foreignKeys = [ForeignKey(
-        entity = BestPodcastModel::class,
-        parentColumns = ["podcastId"],
-        childColumns = ["podcast_id"],
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    )]
-)
-data class BestPodcastListId(
-    @ColumnInfo(name = "podcast_id")
-    val podcastId: String,
-    @ColumnInfo(name = "genre_id")
-    val genre_id: Int
-)
+//@Entity(
+//    tableName = "bestpodcast_list",
+//    primaryKeys = ["genre_id"],
+//    foreignKeys = [ForeignKey(
+//        entity = BestPodcastModel::class,
+//        parentColumns = ["podcastid"],
+//        childColumns = ["podcast_id"],
+//        onDelete = ForeignKey.CASCADE,
+//        onUpdate = ForeignKey.CASCADE
+//    )]
+//)
+//data class BestPodcastListId(
+//    @ColumnInfo(name = "podcast_id")
+//    val podcastId: String,
+//    @ColumnInfo(name = "genre_id")
+//    val genre_id: Int
+//)
 
 @Entity(tableName = "bestpodcast")
 data class BestPodcastModel(
     @PrimaryKey
-    @ColumnInfo(name = "podcastId")
+    @ColumnInfo(name = "podcastid")
     val id: String,
-    @ColumnInfo(name = "genreId")
+    @ColumnInfo(name = "genreid")
     val genreId: Int,
     @ColumnInfo(name = "genre")
     val genre: String,

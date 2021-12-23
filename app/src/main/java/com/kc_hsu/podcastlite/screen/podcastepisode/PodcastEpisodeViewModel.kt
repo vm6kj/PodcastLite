@@ -16,7 +16,7 @@ class PodcastEpisodeViewModel : ViewModel() {
     fun getEpisodeWithFlow(podcastId: String) {
         // TODO Use combineTransform() to combine loading state.
         episodes = Pager(
-            config = PagingConfig(pageSize = 10, prefetchDistance = 1),
+            config = PagingConfig(pageSize = 20, prefetchDistance = 2),
             pagingSourceFactory = { EpisodeDataSource(podcastId) }
         ).flow.cachedIn(viewModelScope)
     }

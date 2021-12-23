@@ -20,7 +20,6 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val bestPodcastsBodies = arrayListOf<List<BestPodcastModel>>()
             PodcastGenres.values().forEachIndexed { index, podcastGenres ->
-                Timber.d("getBestPodcasts: ${podcastGenres.genreId}")
                 _homeState.update { HomeDataState.Loading }
                 _homeState.update {
                     PodcastRepo.getBestPodcasts(podcastGenres.genreId)?.let {

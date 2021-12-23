@@ -10,16 +10,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
-import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
+import com.kc_hsu.podcastlite.data.local.PodcastDao
+import org.koin.core.inject
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import com.kc_hsu.podcastlite.screen.podcastepisode.PodcastEpisodeFragment
 import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
 import com.kc_hsu.podcastlite.utils.openFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
 import timber.log.Timber
 
-class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate), PodcastClickListener, SettingClickListener {
+class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate), PodcastClickListener, SettingClickListener, KoinComponent {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -48,7 +51,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
             viewModel.homeState
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.CREATED)
                 .collect {
-                    Timber.d("Find collect data: $it")
                     when (it) {
                         is HomeDataState.Idle -> {
                             homeAdapter.loadMore(false)

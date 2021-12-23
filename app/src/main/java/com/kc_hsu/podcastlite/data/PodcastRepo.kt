@@ -78,20 +78,20 @@ object PodcastRepo : KoinComponent {
     }
 
     suspend fun getPodcastEpisode(podcastId: String, nextEpisodePubDate: Long?): PodcastsBody? {
-        try {
+        return try {
             val response = api.podcastsById(
                 podcastId = podcastId,
                 nextEpisodePubDate = nextEpisodePubDate,
                 sort = "recent_first"
             )
-            return if (response.isSuccessful) {
+            if (response.isSuccessful) {
                 response.body()
             } else {
                 null
             }
         } catch (e: HttpException) {
             Timber.e("HttpException: ${e.message()}")
-            return null
+            null
         }
     }
 

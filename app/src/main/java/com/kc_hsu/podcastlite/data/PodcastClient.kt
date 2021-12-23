@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit
 
 object PodcastClient {
 
-    // private const val BASE_URL = "https://listen-api.listennotes.com/api/v2/"
+//     private const val BASE_URL = "https://listen-api.listennotes.com/api/v2/"
     private const val BASE_URL = "https://listen-api-test.listennotes.com/api/v2/"
 
     // TODO Move to Config
-    private const val API_KEY = "b1b2deeb0e5f453fa9183d3ce0fa9653"
+    private const val API_KEY = ""
 
     fun getApiClient(): PodcastApi {
         val gson = GsonBuilder()

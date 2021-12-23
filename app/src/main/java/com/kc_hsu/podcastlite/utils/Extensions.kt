@@ -14,6 +14,15 @@ fun Activity.openFragment(fragment: Fragment, addToBackStack: Boolean) {
     }
 }
 
+fun Activity.replaceFragment(fragment: Fragment) {
+    this as AppCompatActivity
+    supportFragmentManager.beginTransaction().apply {
+        replace(R.id.home_fragment_container, fragment)
+        addToBackStack(null)
+        commit()
+    }
+}
+
 fun Fragment.openFragment(fragment: Fragment, addToBackStack: Boolean) {
     parentFragmentManager.beginTransaction().apply {
         add(R.id.home_fragment_container, fragment)

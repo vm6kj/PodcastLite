@@ -111,6 +111,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        supportFragmentManager.popBackStack()
         binding.vpHost.currentItem = item.order
         return true
     }
