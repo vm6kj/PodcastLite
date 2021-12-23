@@ -11,6 +11,12 @@ import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.PodcastEpisodeFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
+import androidx.recyclerview.widget.DividerItemDecoration
+
+import android.R.string.no
+
+
+
 
 class PodcastEpisodeFragment :
     BaseViewBindingFragment<PodcastEpisodeFragmentBinding>(PodcastEpisodeFragmentBinding::inflate) {
@@ -56,6 +62,8 @@ class PodcastEpisodeFragment :
             rvPodcastDetailList.adapter = podcastEpisodeAdapter
             rvPodcastDetailList.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            rvPodcastDetailList.addItemDecoration(divider)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {

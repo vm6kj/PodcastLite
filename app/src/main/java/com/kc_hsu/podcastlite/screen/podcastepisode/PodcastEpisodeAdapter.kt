@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.responsebody.PodcastsBody
-import com.kc_hsu.podcastlite.databinding.PodcastDetailListItemBinding
+import com.kc_hsu.podcastlite.databinding.PodcastEpisodeListItemBinding
 import timber.log.Timber
 
-class PodcastEpisodeAdapter() : PagingDataAdapter<PodcastsBody.Episode, PodcastEpisodeAdapter.PodcastDetailViewHolder>(PodcastDiffCallback) {
+class PodcastEpisodeAdapter : PagingDataAdapter<PodcastsBody.Episode, PodcastEpisodeAdapter.PodcastDetailViewHolder>(PodcastDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastDetailViewHolder {
-        return PodcastDetailViewHolder(PodcastDetailListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return PodcastDetailViewHolder(PodcastEpisodeListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: PodcastDetailViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) } ?: Timber.e("Failed to retrieve item at $position")
     }
 
-    class PodcastDetailViewHolder(private val binding: PodcastDetailListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PodcastDetailViewHolder(private val binding: PodcastEpisodeListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(episode: PodcastsBody.Episode) {
             with(binding) {
                 Glide.with(squareRoundedImageView)

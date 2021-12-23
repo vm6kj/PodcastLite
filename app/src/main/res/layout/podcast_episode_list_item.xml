@@ -8,8 +8,8 @@
 
     <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
         android:id="@+id/squareRoundedImageView"
-        android:layout_width="@dimen/image_small"
-        android:layout_height="@dimen/image_small"
+        android:layout_width="@dimen/image_medium"
+        android:layout_height="@dimen/image_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="60dp" />
+        app:layout_constraintGuide_begin="120dp" />
 
     <TextView
         android:id="@+id/tv_episode_title"
@@ -34,15 +34,13 @@
         android:id="@+id/tv_episode_description"
         style="?attr/textStyleSmall"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:maxLines="3"
+        android:layout_height="0dp"
+        android:maxLines="2"
         android:text="@string/episode_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_episode_title"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_episode_title" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

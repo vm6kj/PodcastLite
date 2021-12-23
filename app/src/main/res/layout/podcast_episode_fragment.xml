@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="?attr/background_elevated"
     android:clickable="true"
-    android:padding="16dp"
+    android:paddingLeft="@dimen/common_padding"
+    android:paddingTop="@dimen/common_padding"
+    android:paddingRight="@dimen/common_padding"
     tools:context=".screen.podcastepisode.PodcastEpisodeFragment">
 
     <com.kc_hsu.podcastlite.customview.SquareRoundedImageView

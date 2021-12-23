@@ -6,8 +6,10 @@
     tools:context=".screen.album.tabs.RecentAddedFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Recent Added" />
+        style="?attr/titleTextStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Coming Soon..." />
 
 </FrameLayout>
