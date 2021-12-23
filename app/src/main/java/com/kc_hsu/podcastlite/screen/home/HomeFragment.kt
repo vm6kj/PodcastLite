@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import com.kc_hsu.podcastlite.screen.podcastepisode.PodcastEpisodeFragment
@@ -70,7 +71,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
         }
     }
 
-    override fun onPodcastClick(podcast: BestPodcastsBody.Podcast) {
+    override fun onPodcastClick(podcast: BestPodcastModel) {
         openFragment(PodcastEpisodeFragment.newInstance(podcast), true)
     }
 

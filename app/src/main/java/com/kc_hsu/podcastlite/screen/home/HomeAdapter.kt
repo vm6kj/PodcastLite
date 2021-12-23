@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
 import com.kc_hsu.podcastlite.databinding.HomeHeaderBinding
@@ -30,8 +30,8 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
 
     private var loadingState: HomeDataState = HomeDataState.Idle
 
-    private var listOfBestPodcasts = mutableListOf<BestPodcastsBody>()
-    fun updateData(bestPodcasts: List<BestPodcastsBody>) {
+    private var listOfBestPodcasts = mutableListOf<List<BestPodcastModel>>()
+    fun updateData(bestPodcasts: List<List<BestPodcastModel>>) {
         bestPodcasts.subList(listOfBestPodcasts.size, bestPodcasts.size).forEachIndexed { index, bestPodcastsBody ->
             listOfBestPodcasts.add(bestPodcastsBody)
             notifyItemInserted(listOfBestPodcasts.size)
@@ -122,7 +122,7 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
     class BannerViewHolder(private val binding: HomeBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adapter: ImageBannerAdapter) {
-            binding.tvBannerTitle.text = adapter.bestPodcastsBody.name
+            binding.tvBannerTitle.text = adapter.bestPodcasts[0].genre
             binding.bannerBestPodcasts.apply {
                 setAdapter(adapter)
                 setIndicator(BannerIndicator(context))
@@ -130,7 +130,7 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                 setOnBannerListener { data, position ->
                     Snackbar.make(
                         this,
-                        "Banner clicked on ${(data as BestPodcastsBody.Podcast).title} ($position)",
+                        "Banner clicked on ${(data as BestPodcastModel).title} ($position)",
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
@@ -148,7 +148,7 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                     addItemDecoration(SpacesItemDecoration())
                 }
             }
-            binding.tvListTitle.text = adapter.bestPodcastsBody.name
+            binding.tvListTitle.text = adapter.bestPodcasts[0].genre
         }
     }
 

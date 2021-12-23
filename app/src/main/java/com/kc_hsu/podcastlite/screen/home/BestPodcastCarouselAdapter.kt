@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeItemBestPodcastBinding
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 
-class BestPodcastCarouselAdapter(val bestPodcastsBody: BestPodcastsBody, private val listener: PodcastClickListener) : RecyclerView.Adapter<BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>() {
+class BestPodcastCarouselAdapter(val bestPodcasts: List<BestPodcastModel>, private val listener: PodcastClickListener) : RecyclerView.Adapter<BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestPodcastCarouselViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -19,14 +20,14 @@ class BestPodcastCarouselAdapter(val bestPodcastsBody: BestPodcastsBody, private
     }
 
     override fun onBindViewHolder(holder: BestPodcastCarouselViewHolder, position: Int) {
-        bestPodcastsBody.podcasts?.get(position)?.let { holder.bind(it) }
+        holder.bind(bestPodcasts[position])
     }
 
-    override fun getItemCount(): Int = bestPodcastsBody.podcasts?.size ?: 0
+    override fun getItemCount(): Int = bestPodcasts.size
 
     inner class BestPodcastCarouselViewHolder(private val binding: HomeItemBestPodcastBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(podcast: BestPodcastsBody.Podcast) {
+        fun bind(podcast: BestPodcastModel) {
             with(binding) {
                 cvBestPodcast.setOnClickListener(object : DebouncedClickListener() {
                     override fun onDebouncedClick(v: View) {

@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeBannerImageBinding
 import com.youth.banner.adapter.BannerAdapter
 
-class ImageBannerAdapter(val bestPodcastsBody: BestPodcastsBody) : BannerAdapter<BestPodcastsBody.Podcast, ImageBannerAdapter.ImageBannerViewHolder>(bestPodcastsBody.podcasts) {
+class ImageBannerAdapter(val bestPodcasts: List<BestPodcastModel>) : BannerAdapter<BestPodcastModel, ImageBannerAdapter.ImageBannerViewHolder>(bestPodcasts) {
 
     override fun onCreateHolder(parent: ViewGroup?, viewType: Int): ImageBannerViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
@@ -19,7 +20,7 @@ class ImageBannerAdapter(val bestPodcastsBody: BestPodcastsBody) : BannerAdapter
 
     override fun onBindView(
         holder: ImageBannerViewHolder?,
-        data: BestPodcastsBody.Podcast?,
+        data: BestPodcastModel?,
         position: Int,
         size: Int
     ) {

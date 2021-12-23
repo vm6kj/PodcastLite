@@ -14,9 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import androidx.recyclerview.widget.DividerItemDecoration
 
 import android.R.string.no
-
-
-
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 
 class PodcastEpisodeFragment :
     BaseViewBindingFragment<PodcastEpisodeFragmentBinding>(PodcastEpisodeFragmentBinding::inflate) {
@@ -24,7 +22,7 @@ class PodcastEpisodeFragment :
     companion object {
         private const val KEY_PODCAST = "podcast"
 
-        fun newInstance(podcast: BestPodcastsBody.Podcast): PodcastEpisodeFragment {
+        fun newInstance(podcast: BestPodcastModel): PodcastEpisodeFragment {
             val args = Bundle()
             args.putSerializable(KEY_PODCAST, podcast)
 
@@ -35,8 +33,8 @@ class PodcastEpisodeFragment :
     }
 
     private val viewModel: PodcastEpisodeViewModel by viewModels()
-    private val podcast: BestPodcastsBody.Podcast by lazy {
-        requireArguments().getSerializable(KEY_PODCAST) as BestPodcastsBody.Podcast
+    private val podcast: BestPodcastModel by lazy {
+        requireArguments().getSerializable(KEY_PODCAST) as BestPodcastModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +43,7 @@ class PodcastEpisodeFragment :
     }
 
     private fun loadView() {
-        viewModel.getEpisodeWithFlow(podcast.id!!)
+        viewModel.getEpisodeWithFlow(podcast.id)
         val podcastEpisodeAdapter = PodcastEpisodeAdapter()
         with(binding) {
             // top-left image view

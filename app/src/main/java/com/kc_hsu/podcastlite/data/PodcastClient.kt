@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,6 +38,7 @@ object PodcastClient {
             .addInterceptor(headerInInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
+            .protocols(listOf(Protocol.HTTP_1_1, Protocol.HTTP_2))
             .build()
 
         val retrofit = Retrofit.Builder()
