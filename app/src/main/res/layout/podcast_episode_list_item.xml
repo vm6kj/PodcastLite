@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/small_padding">
+    android:layout_marginTop="@dimen/small_padding"
+    android:layout_marginBottom="@dimen/small_padding">
 
     <com.kc_hsu.podcastlite.customview.SquareRoundedImageView
         android:id="@+id/squareRoundedImageView"
