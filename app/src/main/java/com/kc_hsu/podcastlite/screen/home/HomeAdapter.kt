@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
 import com.kc_hsu.podcastlite.databinding.HomeHeaderBinding
 import com.kc_hsu.podcastlite.databinding.HomeListLoadMoreBinding
-import com.kc_hsu.podcastlite.screen.helpers.SpacesItemDecoration
+import com.kc_hsu.podcastlite.screen.helpers.CarouselSpacesItemDecoration
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 import com.youth.banner.transformer.ScaleInTransformer
 import timber.log.Timber
@@ -145,7 +146,8 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                 setAdapter(adapter)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 if (itemDecorationCount == 0) {
-                    addItemDecoration(SpacesItemDecoration())
+                    val itemSpacing = resources.getDimensionPixelSize(R.dimen.carousel_spacing)
+                    addItemDecoration(CarouselSpacesItemDecoration(itemSpacing))
                 }
             }
             binding.tvListTitle.text = adapter.bestPodcasts[0].genre

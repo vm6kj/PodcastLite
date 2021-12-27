@@ -37,7 +37,8 @@ class PodcastLiteApplication : Application() {
                 exoPlayerModule,
                 dataSourceModule,
                 dbModule,
-                daoModule
+                daoModule,
+                podcastRepoModule
             )
         }
     }

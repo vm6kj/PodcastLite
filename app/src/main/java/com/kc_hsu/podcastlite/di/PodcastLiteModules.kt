@@ -5,6 +5,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.kc_hsu.podcastlite.data.PodcastClient
+import com.kc_hsu.podcastlite.data.PodcastRepo
+import com.kc_hsu.podcastlite.data.PodcastRepoImpl
 import com.kc_hsu.podcastlite.data.datasource.BestPodcastDataSourceFactory
 import com.kc_hsu.podcastlite.data.local.PodcastDatabase
 import com.kc_hsu.podcastlite.screen.album.AlbumFragment
@@ -83,4 +85,8 @@ val dbModule = module {
 
 val daoModule = module {
     single { get<PodcastDatabase>().podcastDao() }
+}
+
+val podcastRepoModule = module {
+    single<PodcastRepo> { PodcastRepoImpl(get(), get()) }
 }

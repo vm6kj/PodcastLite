@@ -28,4 +28,6 @@
 
     <dimen name="common_padding">16dp</dimen>
     <dimen name="small_padding">8dp</dimen>
+
+    <dimen name="carousel_spacing">16dp</dimen>
 </resources>

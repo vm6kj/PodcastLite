@@ -3,15 +3,19 @@ package com.kc_hsu.podcastlite.screen.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kc_hsu.podcastlite.data.PodcastRepo
+import com.kc_hsu.podcastlite.data.PodcastRepoImpl
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : ViewModel(), KoinComponent {
+
+    private val podcastRepo by inject<PodcastRepo>()
 
     private val _homeState = MutableStateFlow<HomeDataState>(HomeDataState.Idle)
     val homeState = _homeState.asStateFlow()
@@ -22,7 +26,7 @@ class HomeViewModel : ViewModel() {
             PodcastGenres.values().forEachIndexed { index, podcastGenres ->
                 _homeState.update { HomeDataState.Loading }
                 _homeState.update {
-                    PodcastRepo.getBestPodcasts(podcastGenres.genreId)?.let {
+                    podcastRepo.getBestPodcasts(podcastGenres.genreId)?.let {
                         if (it.isNullOrEmpty()) {
                             return@let HomeDataState.Error("Cannot fetch best podcast")
                         }
