@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
-import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
 import com.kc_hsu.podcastlite.databinding.HomeItemBestPodcastBinding
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 

@@ -10,33 +10,42 @@ import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.databinding.HomeBannerBinding
 import com.kc_hsu.podcastlite.databinding.HomeCarouselListBinding
+import com.kc_hsu.podcastlite.databinding.HomeFooterBinding
 import com.kc_hsu.podcastlite.databinding.HomeHeaderBinding
-import com.kc_hsu.podcastlite.databinding.HomeListLoadMoreBinding
 import com.kc_hsu.podcastlite.screen.helpers.CarouselSpacesItemDecoration
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
 import com.youth.banner.transformer.ScaleInTransformer
-import timber.log.Timber
 
-class HomeAdapter internal constructor(private val podcastClickListener: PodcastClickListener, private val settingClickListener: SettingClickListener) :
+class HomeAdapter internal constructor(
+    private val podcastClickListener: PodcastClickListener,
+    private val settingClickListener: SettingClickListener
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val VIEW_TYPE_FOOT = -1
-        private const val VIEW_TYPE_HEADER = 0
-        private const val VIEW_TYPE_BANNER = 1
-        private const val VIEW_TYPE_HORIZONTAL_SCROLL = 2
-        // TODO write a function to calculate offset for more complex UI
-        private const val sectionOffset = 1
+        /**
+         * View Structure:
+         *
+         * -----HEADER VIEW-----    => Fixed view, always show
+         * -----BANNER VIEW-----    => listOfBestPodcasts[0]
+         * ----CAROUSEL VIEW----    => listOfBestPodcasts[1 to itemCount-2]
+         * ------FOOT VIEW------    => Fixed view, shown if (loadingState == HomeDataState.Loading), hidden otherwise
+         * */
+        private enum class ViewType {
+            VIEW_TYPE_HEADER, VIEW_TYPE_BANNER, VIEW_TYPE_CAROUSEL, VIEW_TYPE_FOOTER
+        }
+
+        // BANNER VIEW and CAROUSEL VIEW are always below HEADER VIEW
+        private const val VIEW_SECTION_OFFSET = 1
     }
 
     private var loadingState: HomeDataState = HomeDataState.Idle
 
     private var listOfBestPodcasts = mutableListOf<List<BestPodcastModel>>()
-    fun updateData(bestPodcasts: List<List<BestPodcastModel>>) {
-        bestPodcasts.subList(listOfBestPodcasts.size, bestPodcasts.size).forEachIndexed { index, bestPodcastsBody ->
-            listOfBestPodcasts.add(bestPodcastsBody)
-            notifyItemInserted(listOfBestPodcasts.size)
-        }
+    // TODO Use data provider for better architecture
+    fun updateData(bestPodcasts: List<BestPodcastModel>) {
+        listOfBestPodcasts.add(bestPodcasts)
+        notifyItemInserted(listOfBestPodcasts.size)
     }
 
     fun loadMore(shouldLoadMore: Boolean) {
@@ -45,22 +54,26 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
         } else {
             HomeDataState.Idle
         }
-        // notifyDataSetChanged()
+        // Always in the bottom
+        notifyItemChanged(listOfBestPodcasts.size + 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_TYPE_HEADER -> {
+            R.layout.home_header -> {
                 HeaderViewHolder(HomeHeaderBinding.inflate(layoutInflater, parent, false))
             }
-            VIEW_TYPE_BANNER -> {
+            R.layout.home_banner -> {
                 BannerViewHolder(HomeBannerBinding.inflate(layoutInflater, parent, false))
             }
-            VIEW_TYPE_FOOT -> {
-                LoadMoreViewHolder(HomeListLoadMoreBinding.inflate(layoutInflater, parent, false))
+            R.layout.home_carousel_list -> {
+                CarouselViewHolder(HomeCarouselListBinding.inflate(layoutInflater, parent, false))
             }
-            else -> CarouselViewHolder(HomeCarouselListBinding.inflate(layoutInflater, parent, false))
+            R.layout.home_footer -> {
+                LoadMoreViewHolder(HomeFooterBinding.inflate(layoutInflater, parent, false))
+            }
+            else -> throw IllegalStateException("Illegal viewType: $viewType")
         }
     }
 
@@ -70,12 +83,14 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
                 holder.bind()
             }
             is BannerViewHolder -> {
-                val adapter = ImageBannerAdapter(listOfBestPodcasts[position - sectionOffset])
+                val adapter = ImageBannerAdapter(listOfBestPodcasts[position - VIEW_SECTION_OFFSET])
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
-                Timber.d("is CarouselViewHolder")
-                val adapter = BestPodcastCarouselAdapter(listOfBestPodcasts[position - sectionOffset], podcastClickListener)
+                val adapter = BestPodcastCarouselAdapter(
+                    listOfBestPodcasts[position - VIEW_SECTION_OFFSET],
+                    podcastClickListener
+                )
                 holder.bind(adapter)
             }
             is LoadMoreViewHolder -> {
@@ -85,32 +100,49 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
     }
 
     override fun getItemCount(): Int {
-        Timber.d("getItemCount: ${listOfBestPodcasts.size}")
-        return 1 + listOfBestPodcasts.size // + if (loadingState == HomeDataState.Loading) 1 else 0
+        // 2: HEADER VIEW and FOOT VIEW
+        return 2 + listOfBestPodcasts.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        // if (itemCount == position) {
-        //     return VIEW_TYPE_FOOT
-        // }
-        return when (position) {
-            VIEW_TYPE_HEADER -> {
-                VIEW_TYPE_HEADER
+        return when (getViewTypeAtPosition(position)) {
+            ViewType.VIEW_TYPE_HEADER -> R.layout.home_header
+            ViewType.VIEW_TYPE_BANNER -> R.layout.home_banner
+            ViewType.VIEW_TYPE_CAROUSEL -> R.layout.home_carousel_list
+            ViewType.VIEW_TYPE_FOOTER -> R.layout.home_footer
+        }
+    }
+
+    private fun getViewTypeAtPosition(position: Int): ViewType {
+        if (listOfBestPodcasts.isEmpty()) {
+            return if (position == 0) {
+                ViewType.VIEW_TYPE_HEADER
+            } else {
+                ViewType.VIEW_TYPE_FOOTER
             }
-            VIEW_TYPE_BANNER -> {
-                VIEW_TYPE_BANNER
-            }
-            VIEW_TYPE_HORIZONTAL_SCROLL -> {
-                VIEW_TYPE_HORIZONTAL_SCROLL
-            }
-            // TODO add a view type list
-            else -> {
-                VIEW_TYPE_HORIZONTAL_SCROLL
+        } else {
+            return when (position) {
+                0 -> {
+                    ViewType.VIEW_TYPE_HEADER
+                }
+                1 -> {
+                    ViewType.VIEW_TYPE_BANNER
+                }
+                in 2 until itemCount - 1 -> {
+                    ViewType.VIEW_TYPE_CAROUSEL
+                }
+                itemCount - 1 -> {
+                    ViewType.VIEW_TYPE_FOOTER
+                }
+                else -> {
+                    throw IllegalStateException("Illegal position: $position")
+                }
             }
         }
     }
 
-    inner class HeaderViewHolder(private val binding: HomeHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HeaderViewHolder(private val binding: HomeHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.ivSetting.setOnClickListener(object : DebouncedClickListener() {
                 override fun onDebouncedClick(v: View) {
@@ -154,7 +186,8 @@ class HomeAdapter internal constructor(private val podcastClickListener: Podcast
         }
     }
 
-    class LoadMoreViewHolder(private val binding: HomeListLoadMoreBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LoadMoreViewHolder(private val binding: HomeFooterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(state: HomeDataState) {
             binding.pbLoadMore.visibility = if (state == HomeDataState.Loading) {
                 View.VISIBLE

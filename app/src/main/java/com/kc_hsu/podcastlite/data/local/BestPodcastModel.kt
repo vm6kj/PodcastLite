@@ -2,11 +2,10 @@ package com.kc_hsu.podcastlite.data.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-//@Entity(
+// @Entity(
 //    tableName = "bestpodcast_list",
 //    primaryKeys = ["genre_id"],
 //    foreignKeys = [ForeignKey(
@@ -16,13 +15,13 @@ import java.io.Serializable
 //        onDelete = ForeignKey.CASCADE,
 //        onUpdate = ForeignKey.CASCADE
 //    )]
-//)
-//data class BestPodcastListId(
+// )
+// data class BestPodcastListId(
 //    @ColumnInfo(name = "podcast_id")
 //    val podcastId: String,
 //    @ColumnInfo(name = "genre_id")
 //    val genre_id: Int
-//)
+// )
 
 @Entity(tableName = "bestpodcast")
 data class BestPodcastModel(

@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
-import com.kc_hsu.podcastlite.data.responsebody.BestPodcastsBody
+import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.databinding.PodcastEpisodeFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
-import androidx.recyclerview.widget.DividerItemDecoration
-
-import android.R.string.no
-import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 
 class PodcastEpisodeFragment :
     BaseViewBindingFragment<PodcastEpisodeFragmentBinding>(PodcastEpisodeFragmentBinding::inflate) {
