@@ -10,6 +10,8 @@
         style="?attr/titleTextStyleLarge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/common_padding"
+        android:paddingRight="@dimen/common_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

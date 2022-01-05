@@ -16,7 +16,7 @@ class CarouselSpacesItemDecoration(@Px private val innerSpace: Int) : RecyclerVi
 
         val itemPosition = parent.getChildAdapterPosition(view)
 
-        outRect.left = if (itemPosition == 0) 0 else innerSpace / 2
-        outRect.right = if (itemPosition == state.itemCount - 1) 0 else innerSpace / 2
+        outRect.left = if (itemPosition == 0) innerSpace else innerSpace / 2
+        outRect.right = if (itemPosition == state.itemCount - 1) innerSpace else innerSpace / 2
     }
 }
