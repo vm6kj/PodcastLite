@@ -4,7 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kc_hsu.podcastlite.base.BaseViewBindingFragment
@@ -13,9 +14,10 @@ import com.kc_hsu.podcastlite.databinding.HomeFragmentBinding
 import com.kc_hsu.podcastlite.screen.podcastepisode.PodcastEpisodeFragment
 import com.kc_hsu.podcastlite.screen.preferences.PreferenceActivity
 import com.kc_hsu.podcastlite.utils.openFragment
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
+import timber.log.Timber
 
 class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate), PodcastClickListener, SettingClickListener, KoinComponent {
 
@@ -27,6 +29,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.e("onViewCreated!!")
         loadView()
     }
 
@@ -41,8 +44,10 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
             )
         }
 
-        val observer = object : Observer<HomeDataState> {
-            override fun onChanged(it: HomeDataState?) {
+        preloadData()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.viewEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.CREATED).collect {
                 when (it) {
                     is HomeDataState.Idle -> {
                         homeAdapter.loadMore(false)
@@ -52,6 +57,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
                     }
                     is HomeDataState.Success -> {
                         homeAdapter.loadMore(false)
+                        Timber.e("HomeDataState.Success!")
                         homeAdapter.updateData(it.data)
                     }
                     is HomeDataState.Error<*> -> {
@@ -59,14 +65,17 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
                     }
                     is HomeDataState.Done -> {
                         homeAdapter.loadMore(false)
-                        viewModel.homeStateLiveData.removeObserver(this)
                     }
                 }
             }
         }
+    }
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.homeStateLiveData.observeForever(observer)
+    private fun preloadData() {
+        lifecycleScope.launch {
+            PodcastGenres.values().forEach {
+                viewModel.getBestPodcastsByGenre(it.genreId)
+            }
         }
     }
 

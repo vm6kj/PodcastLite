@@ -147,9 +147,9 @@ class PodcastRepoImpl(private val api: PodcastApi, private val podcastDao: Podca
             try {
                 // query from DB cached
                 emit(HomeDataState.Loading)
-                val test = podcastDao.queryBestPodcastList(genreId)
-                if (test.isNotEmpty()) {
-                    emit(HomeDataState.Success(test))
+                val cachedPodcastList = podcastDao.queryBestPodcastList(genreId)
+                if (cachedPodcastList.isNotEmpty()) {
+                    emit(HomeDataState.Success(cachedPodcastList))
                 }
                 val response = api.bestPodcasts(genreId = genreId, page = 1, region = "us")
                 if (response.isSuccessful) {
