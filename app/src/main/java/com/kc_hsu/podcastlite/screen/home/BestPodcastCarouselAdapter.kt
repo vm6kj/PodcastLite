@@ -3,14 +3,17 @@ package com.kc_hsu.podcastlite.screen.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kc_hsu.podcastlite.R
 import com.kc_hsu.podcastlite.data.local.BestPodcastModel
 import com.kc_hsu.podcastlite.databinding.HomeItemBestPodcastBinding
 import com.kc_hsu.podcastlite.utils.DebouncedClickListener
+import timber.log.Timber
 
-class BestPodcastCarouselAdapter(val bestPodcasts: List<BestPodcastModel>, private val listener: PodcastClickListener) : RecyclerView.Adapter<BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>() {
+class BestPodcastCarouselAdapter(private val listener: PodcastClickListener) : ListAdapter<BestPodcastModel, BestPodcastCarouselAdapter.BestPodcastCarouselViewHolder>(CarouselDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestPodcastCarouselViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -19,10 +22,10 @@ class BestPodcastCarouselAdapter(val bestPodcasts: List<BestPodcastModel>, priva
     }
 
     override fun onBindViewHolder(holder: BestPodcastCarouselViewHolder, position: Int) {
-        holder.bind(bestPodcasts[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = bestPodcasts.size
+    override fun getItemId(position: Int): Long = getItem(position).id.hashCode().toLong()
 
     inner class BestPodcastCarouselViewHolder(private val binding: HomeItemBestPodcastBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -39,6 +42,22 @@ class BestPodcastCarouselAdapter(val bestPodcasts: List<BestPodcastModel>, priva
                     .into(ivPodcastImage)
                 tvPodcastName.text = podcast.title
             }
+        }
+    }
+
+    class CarouselDiffCallback : DiffUtil.ItemCallback<BestPodcastModel>() {
+        override fun areItemsTheSame(
+            oldItem: BestPodcastModel,
+            newItem: BestPodcastModel
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: BestPodcastModel,
+            newItem: BestPodcastModel
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

@@ -39,9 +39,11 @@ class HomeAdapter internal constructor(
         private const val VIEW_SECTION_OFFSET = 1
     }
 
+    private val sharedPool = RecyclerView.RecycledViewPool()
     private var loadingState: HomeDataState = HomeDataState.Idle
 
     private var listOfBestPodcasts = mutableListOf<List<BestPodcastModel>>()
+
     // TODO Use data provider for better architecture
     fun updateData(bestPodcasts: List<BestPodcastModel>) {
         listOfBestPodcasts.add(bestPodcasts)
@@ -68,7 +70,11 @@ class HomeAdapter internal constructor(
                 BannerViewHolder(HomeBannerBinding.inflate(layoutInflater, parent, false))
             }
             R.layout.home_carousel_list -> {
-                CarouselViewHolder(HomeCarouselListBinding.inflate(layoutInflater, parent, false))
+                val adapter = BestPodcastCarouselAdapter(podcastClickListener)
+                CarouselViewHolder(
+                    adapter,
+                    HomeCarouselListBinding.inflate(layoutInflater, parent, false)
+                )
             }
             R.layout.home_footer -> {
                 LoadMoreViewHolder(HomeFooterBinding.inflate(layoutInflater, parent, false))
@@ -87,11 +93,7 @@ class HomeAdapter internal constructor(
                 holder.bind(adapter)
             }
             is CarouselViewHolder -> {
-                val adapter = BestPodcastCarouselAdapter(
-                    listOfBestPodcasts[position - VIEW_SECTION_OFFSET],
-                    podcastClickListener
-                )
-                holder.bind(adapter)
+                holder.bind(listOfBestPodcasts[position - VIEW_SECTION_OFFSET])
             }
             is LoadMoreViewHolder -> {
                 holder.bind(loadingState)
@@ -156,6 +158,7 @@ class HomeAdapter internal constructor(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adapter: ImageBannerAdapter) {
             binding.tvBannerTitle.text = adapter.bestPodcasts[0].genre
+            // FIXME I think there may have some bugs on Banner, maybe custom one instead.
             binding.bannerBestPodcasts.apply {
                 setAdapter(adapter)
                 setIndicator(BannerIndicator(context))
@@ -171,18 +174,27 @@ class HomeAdapter internal constructor(
         }
     }
 
-    class CarouselViewHolder(private val binding: HomeCarouselListBinding) :
+    inner class CarouselViewHolder(
+        private val bAdapter: BestPodcastCarouselAdapter,
+        private val binding: HomeCarouselListBinding
+    ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(adapter: BestPodcastCarouselAdapter) {
+        init {
             with(binding.rvCarousel) {
-                setAdapter(adapter)
+                bAdapter.setHasStableIds(true)
+                setRecycledViewPool(sharedPool)
+                adapter = bAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 if (itemDecorationCount == 0) {
                     val itemSpacing = resources.getDimensionPixelSize(R.dimen.carousel_spacing)
                     addItemDecoration(CarouselSpacesItemDecoration(itemSpacing))
                 }
             }
-            binding.tvListTitle.text = adapter.bestPodcasts[0].genre
+        }
+
+        fun bind(list: List<BestPodcastModel>) {
+            bAdapter.submitList(list)
+            binding.tvListTitle.text = bAdapter.currentList[0].genre
         }
     }
 

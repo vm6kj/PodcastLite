@@ -29,7 +29,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.e("onViewCreated!!")
         loadView()
     }
 
@@ -57,7 +56,6 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
                     }
                     is HomeDataState.Success -> {
                         homeAdapter.loadMore(false)
-                        Timber.e("HomeDataState.Success!")
                         homeAdapter.updateData(it.data)
                     }
                     is HomeDataState.Error<*> -> {
@@ -73,6 +71,7 @@ class HomeFragment : BaseViewBindingFragment<HomeFragmentBinding>(HomeFragmentBi
 
     private fun preloadData() {
         lifecycleScope.launch {
+            Timber.d("lifecycleScope.launch!")
             PodcastGenres.values().forEach {
                 viewModel.getBestPodcastsByGenre(it.genreId)
             }

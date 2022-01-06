@@ -136,6 +136,9 @@ dependencies {
 
     // Banner (https://github.com/youth5201314/banner)
     implementation 'io.github.youth5201314:banner:2.2.2'
+
+    // Blur-LIB-Android (https://github.com/danielzeller/Blur-LIB-Android)
+    implementation 'no.danielzeller.blurbehindlib:blurbehindlib:1.0.0'
 }
 
 task ktlint(type: JavaExec, group: "verification") {
